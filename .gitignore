@@ -13,35 +13,11 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
-noid-minter-state
+!/tmp/.keep
 
-# Ignore pre-ingest generated files for CDM
-/spec/fixtures/contentdm_xml/*
-!/spec/fixtures/contentdm_xml/*.xml
-!/spec/fixtures/contentdm_xml/*.yml
+/node_modules
+/yarn-error.log
 
-/fcrepo4-development-data
-/fcrepo4-test-data
-/fits
-/coverage
-/staged_files
-/public/assets
-
-/config/ldap_groups_lookup.yml
-.secrets.sh
-
-# Ignore Ruby Version Management stuff
-# /.rvmrc
-/.ruby-*
-/.java-*
-
-# Ignore Redis dump file
-dump.rdb
-
-# Ignore fits log
-fits.log
-
-# Ignore OSx files
-.DS_Store
+.byebug_history
