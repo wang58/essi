@@ -27,3 +27,5 @@
 # Ignore IDE files
 .idea
 
+# Ignore local secrets
+.secrets.sh
