@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      paged_resource:     'fa fa-file-text-o'
+    select_type:
+      paged_resource:
+        description:        "Paged resource Werke"
+        name:               "Paged Resource"

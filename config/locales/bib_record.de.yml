@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      bib_record:     'fa fa-file-text-o'
+    select_type:
+      bib_record:
+        description:        "Bib record Werke"
+        name:               "Bib Record"

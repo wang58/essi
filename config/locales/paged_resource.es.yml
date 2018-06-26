@@ -1,0 +1,10 @@
+es:
+  hyrax:
+    icons:
+      paged_resource:     'fa fa-file-text-o'
+    select_type:
+      paged_resource:
+        # TODO: translate `human_name` into Spanish
+        description:        "Paged resource trabajos"
+        name:               "Paged Resource"
+        # TODO: translate `human_name` into Spanish

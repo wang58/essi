@@ -1,0 +1,8 @@
+pt-BR:
+  hyrax:
+    icons:
+      paged_resource:     'fa fa-file-text-o'
+    select_type:
+      paged_resource:
+        description:        "Paged resource trabalhos"
+        name:               "Paged Resource"

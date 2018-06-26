@@ -1,0 +1,10 @@
+es:
+  hyrax:
+    icons:
+      bib_record:     'fa fa-file-text-o'
+    select_type:
+      bib_record:
+        # TODO: translate `human_name` into Spanish
+        description:        "Bib record trabajos"
+        name:               "Bib Record"
+        # TODO: translate `human_name` into Spanish
