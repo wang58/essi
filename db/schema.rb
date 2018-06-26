@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180601145108) do
+ActiveRecord::Schema.define(version: 20180614174958) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -283,6 +283,19 @@ ActiveRecord::Schema.define(version: 20180601145108) do
     t.index ["uri"], name: "index_qa_local_authority_entries_on_uri", unique: true
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+    t.index ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id"
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
+  end
+
   create_table "searches", force: :cascade do |t|
     t.binary "query_params"
     t.integer "user_id"
@@ -532,6 +545,8 @@ ActiveRecord::Schema.define(version: 20180601145108) do
     t.string "preferred_locale"
     t.string "provider"
     t.string "uid"
+    t.boolean "authorized_membership"
+    t.datetime "authorized_membership_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
