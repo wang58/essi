@@ -15,3 +15,21 @@ RSpec.shared_examples "Image Properties" do
     expect(subject).to respond_to(:digital_specifications)
   end
 end
+
+RSpec.shared_examples "BibRecord Properties" do
+  it "includes extended Bibliographic Record metadata" do
+    # Comes from including Catorax::BibRecordMetadata
+    # Test a small subset of the properties available.
+    expect(subject).to respond_to(:bib_editor)
+    expect(subject).to respond_to(:bib_article)
+  end
+end
+
+RSpec.shared_examples "PagedResource Properties" do
+  it "includes extended PagedResource metadata" do
+    # Comes from including Catorax::PagedResourceMetadata
+    # Test a small subset of the properties available.
+    expect(subject).to respond_to(:viewing_hint)
+    expect(subject).to respond_to(:viewing_direction)
+  end
+end
