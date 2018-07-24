@@ -10,10 +10,13 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
 
   source_root File.expand_path('../templates', __FILE__)
 
-  argument :attributes, type: :array, default: [], banner: 'field:type field:type'
+  argument :attributes, type: :array, default: [], mybanner: 'field:type field:type'
+
+  class_option :archetype, type: :string, default: nil
 
   # Why all of these antics with defining individual methods?
   # Because I want the output of Hyrax::WorkGenerator to include all the processed files.
+
   def banner
     if revoking?
       say_status("info", "DESTROYING WORK MODEL: #{class_name}", :blue)
@@ -106,6 +109,39 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
   def create_model_spec
     return unless rspec_installed?
     template('model_spec.rb.erb', File.join('spec/models/', class_path, "#{file_name}_spec.rb"))
+  end
+
+  def archetype
+    return unless options['archetype']
+    @archetype_name = options['archetype']
+
+    unless revoking?
+      if @archetype_name == 'archetype'  # A runtime option without a value will create a key whose value is the same as the key
+        if yes?("The --archetype option was used without a value; make #{class_name} an archetype?")
+          say_status("info", "Modules are being created for #{class_name} that can be included in other work types", :blue)
+
+          # TODO: Create archetype modules
+
+          # We still need to mixin the new archetype modules to the new work type by the same name later
+          @archetype_name = class_name
+        end
+      end
+
+      begin
+        class_file = "concerns/catorax/#{@archetype_name.downcase}_behavior.rb"
+        require "#{class_file}"
+
+        # We never reach this line unless a valid archetype is specified; the 'require' above will throw LoadError and be rescued
+        say_status("info", "Behaviours of #{@archetype_name} are being added to #{class_name}", :blue)
+          # TODO: Insert archetype module mixins into new work type classes
+          
+      rescue LoadError
+        unless @archetype_name == 'archetype'
+          say_status("Error", "Behaviours of #{@archetype_name} archetype are NOT being added; #{class_file} does not exist", :red)
+        end
+        exit
+      end
+    end
   end
 
   def display_readme
