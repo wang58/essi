@@ -133,15 +133,28 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
       end
 
       begin
-        class_file = "concerns/catorax/#{file_name}_behavior.rb"
+        class_file = "concerns/catorax/#{@archetype_name.underscore}_behavior.rb"
         require "#{class_file}"
 
-        # We never reach this line unless a valid archetype is specified; the 'require' above will throw LoadError and be rescued
+        # Inject mixins to classes unless a valid archetype is specified.
+        # Otherwise the 'require' above will throw LoadError and be rescued below
         say_status("info", "Behaviours of #{@archetype_name} are being added to #{class_name}", :blue)
 
         # Insert archetype module mixins into new work type classes
         in_root do
+          target_file = File.join('app/models/', class_path, "#{file_name}.rb")
+          inject_into_file target_file, "  include Catorax::#{@archetype_name}Behavior\n", after: "ActiveFedora::Base\n"
+          inject_into_file target_file, metadata_mixin, after: /validates.*\n/
 
+          target_file = File.join('app/controllers/hyrax', class_path, "#{plural_file_name}_controller.rb")
+          inject_into_file target_file, "    include Catorax::#{@archetype_name.pluralize}ControllerBehavior\n", after: "WorksControllerBehavior\n"
+          gsub_file target_file, "#{class_name}Presenter", "#{@archetype_name}Presenter"
+
+          target_file = File.join('app/indexers', class_path, "#{file_name}_indexer.rb")
+          inject_into_file target_file, "  include Catorax::#{@archetype_name}IndexerBehavior\n", after: "IndexesBasicMetadata\n"
+
+          target_file = File.join('app/forms/hyrax', class_path, "#{file_name}_form.rb")
+          inject_into_file target_file, "    include Catorax::#{@archetype_name}FormBehavior\n", after: "[:resource_type]\n"
         end
 
       rescue LoadError
@@ -173,5 +186,24 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
       # "abc/scholarly_paper" where abc is the namespace and
       #                              scholarly_paper is the concern
       ":\"#{File.join(class_path, file_name)}\""
+    end
+
+    def metadata_mixin
+      "\n # Include extended metadata common to most Work Types\n" \
+          "  include Catorax::ExtendedMetadata\n" \
+      "\n  # This model includes metadata properties specific to the #{@archetype_name} Work Type\n" \
+          "  include Catorax::#{@archetype_name}Metadata\n"
+    end
+
+    def controller_mixin
+
+    end
+
+    def form_mixin
+
+    end
+
+    def indexer_mixin
+
     end
 end
