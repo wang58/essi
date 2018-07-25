@@ -1,0 +1,10 @@
+module Catorax
+  module <%= class_name %>Metadata
+    extend ActiveSupport::Concern
+
+    included do
+      # Add properties that would be appropriate for use in objects of the <%= class_name %> Work Type, such as:
+      # property :digital_specifications, predicate: RDF::Vocab::DC11.format
+    end
+  end
+end

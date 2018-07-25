@@ -117,10 +117,15 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
 
     unless revoking?
       if @archetype_name == 'archetype'  # A runtime option without a value will create a key whose value is the same as the key
-        if yes?("The --archetype option was used without a value; make #{class_name} an archetype?")
+        if yes?("The --archetype option was used without a value; make new #{class_name} Work Type an archetype?")
           say_status("info", "Modules are being created for #{class_name} that can be included in other work types", :blue)
 
-          # TODO: Create archetype modules
+          # Create archetype modules
+          template('controller_behavior.rb.erb', File.join('app/controllers/concerns/catorax', class_path, "#{plural_file_name}_controller_behavior.rb"))
+          template('model_behavior.rb.erb', File.join('app/models/concerns/catorax', class_path, "#{file_name}_behavior.rb"))
+          template('metadata.rb.erb', File.join('app/models/concerns/catorax', class_path, "#{file_name}_metadata.rb"))
+          template('form_behavior.rb.erb', File.join('app/forms/concerns/catorax', class_path, "#{file_name}_form_behavior.rb"))
+          template('indexer_behavior.rb.erb', File.join('app/indexers/concerns/catorax', class_path, "#{file_name}_indexer_behavior.rb"))
 
           # We still need to mixin the new archetype modules to the new work type by the same name later
           @archetype_name = class_name
@@ -128,13 +133,17 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
       end
 
       begin
-        class_file = "concerns/catorax/#{@archetype_name.downcase}_behavior.rb"
+        class_file = "concerns/catorax/#{file_name}_behavior.rb"
         require "#{class_file}"
 
         # We never reach this line unless a valid archetype is specified; the 'require' above will throw LoadError and be rescued
         say_status("info", "Behaviours of #{@archetype_name} are being added to #{class_name}", :blue)
-          # TODO: Insert archetype module mixins into new work type classes
-          
+
+        # Insert archetype module mixins into new work type classes
+        in_root do
+
+        end
+
       rescue LoadError
         unless @archetype_name == 'archetype'
           say_status("Error", "Behaviours of #{@archetype_name} archetype are NOT being added; #{class_file} does not exist", :red)
