@@ -5,5 +5,6 @@ module Hyrax
   class PagedResourceForm < Hyrax::Forms::WorkForm
     self.model_class = ::PagedResource
     self.terms += [:resource_type]
+    include Catorax::PagedResourceFormBehavior
   end
 end
