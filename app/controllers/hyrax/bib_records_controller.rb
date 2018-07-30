@@ -5,6 +5,7 @@ module Hyrax
   class BibRecordsController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
+    include Catorax::BibRecordsControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::BibRecord
 

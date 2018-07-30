@@ -5,5 +5,6 @@ module Hyrax
   class BibRecordForm < Hyrax::Forms::WorkForm
     self.model_class = ::BibRecord
     self.terms += [:resource_type]
+    include Catorax::BibRecordFormBehavior
   end
 end

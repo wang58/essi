@@ -5,6 +5,7 @@ module Hyrax
   class PagedResourcesController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
+    include Catorax::PagedResourcesControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::PagedResource
 
