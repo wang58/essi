@@ -1,7 +1,6 @@
 # Generated via
 #  `rails generate hyrax:work Image`
 require 'rails_helper'
-require 'metadata_helper'
 
 RSpec.describe Image do
 
