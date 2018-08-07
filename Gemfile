@@ -46,6 +46,7 @@ group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
