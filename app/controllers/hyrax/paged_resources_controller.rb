@@ -6,6 +6,7 @@ module Hyrax
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Catorax::PagedResourcesControllerBehavior
+    include Catorax::RemoteMetadataLookupBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::PagedResource
 
