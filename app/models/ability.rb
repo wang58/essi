@@ -6,6 +6,7 @@ class Ability
 
   # Define any customized permissions here.
   def custom_permissions
+    can %i[file_manager save_structure structure], PagedResource
     # Limits deleting objects to a the admin user
     #
     # if current_user.admin?

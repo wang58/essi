@@ -11,5 +11,11 @@ module Hyrax
 
     # Use this line if you want to use a custom presenter
     self.show_presenter = Hyrax::PagedResourcePresenter
+
+    def structure
+      parent_presenter
+      @members = presenter.member_presenters
+      @logical_order = presenter.logical_order_object
+    end
   end
 end

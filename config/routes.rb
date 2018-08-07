@@ -23,6 +23,21 @@ Rails.application.routes.draw do
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
   curation_concerns_basic_routes
+  namespace :hyrax, path: :concern do
+    resources :paged_resources, only: [] do
+      member do
+        get "/pdf/:pdf_quality", action: :pdf, as: :pdf
+        get "/highlight/:search_term", action: :show
+        patch :alphabetize_members
+        get :structure
+        post :structure, action: :save_structure
+        get :manifest, defaults: { format: :json }
+        post :browse_everything_files
+        post :flag
+      end
+    end
+  end
+
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do

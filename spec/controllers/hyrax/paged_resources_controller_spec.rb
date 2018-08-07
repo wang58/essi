@@ -8,5 +8,5 @@ RSpec.describe Hyrax::PagedResourcesController do
   end
   include_examples("structure persister",
                    :paged_resource,
-                   Hyrax::ImagePresenter)
+                   Hyrax::PagedResourcePresenter)
 end
