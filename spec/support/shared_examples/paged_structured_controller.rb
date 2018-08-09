@@ -1,16 +1,19 @@
-RSpec.shared_examples "structure persister" \
+RSpec.shared_examples "paged_structure persister" \
 do |resource_symbol, presenter_factory|
+
   describe "when logged in" do
 
     let(:admin_set_id) { AdminSet.find_or_create_default_admin_set_id }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }
     let(:workflow) { Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template) }
     let(:user) { FactoryBot.create(:user) }
+
+    before { sign_in user }
     describe "#structure" do
 
       let(:solr) { ActiveFedora.solr.conn }
       let(:resource) do
-        r = FactoryBot.build(resource_symbol)
+        r = FactoryBot.create(resource_symbol)
         allow(r).to receive(:id).and_return("1")
         allow(r.list_source).to receive(:id).and_return("3")
         r
@@ -23,17 +26,6 @@ do |resource_symbol, presenter_factory|
 
       before do
         allow(resource.class).to receive(:find).and_return(resource)
-        # Create a single action that can be taken
-        Sipity::WorkflowAction.create!(name: 'submit', workflow: workflow)
-
-        # Grant the user access to deposit into the admin set.
-        Hyrax::PermissionTemplateAccess.create!(
-            permission_template_id: permission_template.id,
-            agent_type: 'user',
-            agent_id: user.user_key,
-            access: 'deposit'
-        )
-        sign_in user
         resource.ordered_members << file_set
         solr.add file_set.to_solr.merge(ordered_by_ssim: [resource.id])
         solr.add resource.to_solr
@@ -42,13 +34,14 @@ do |resource_symbol, presenter_factory|
       end
 
       it "sets @members" do
-        pending "Waiting for implementation"
+        obj = instance_double("logical order object")
+        allow_any_instance_of(presenter_factory) \
+        .to receive(:logical_order_object).and_return(obj)
         get :structure, params: {id: resource.id}
 
         expect(assigns(:members).map(&:id)).to eq ["2"]
       end
       it "sets @logical_order" do
-        pending "Waiting for implementation"
         obj = instance_double("logical order object")
         allow_any_instance_of(presenter_factory) \
         .to receive(:logical_order_object).and_return(obj)

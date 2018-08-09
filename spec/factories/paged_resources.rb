@@ -11,5 +11,9 @@ FactoryBot.define do
     transient do
       user { FactoryBot.create(:user) }
     end
+
+    after(:build) do |work, evaluator|
+      work.apply_depositor_metadata(evaluator.user.user_key)
+    end
   end
 end
