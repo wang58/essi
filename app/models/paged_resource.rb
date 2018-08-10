@@ -3,6 +3,8 @@
 class PagedResource < ActiveFedora::Base
   include Catorax::PagedResourceBehavior
   include ::Hyrax::WorkBehavior
+  include ::StructuralMetadata
+  include ExtraLockable
 
   self.indexer = PagedResourceIndexer
   # Change this to restrict which works can be added as a child.

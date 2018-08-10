@@ -55,7 +55,7 @@ do |resource_symbol, presenter_factory|
 
       let(:resource) { FactoryBot.create(resource_symbol, user: user) }
       let(:file_set) { FactoryBot.create(:file_set, user: user) }
-      #let(:user) { FactoryBot.create(:admin) }
+      let(:user) { FactoryBot.create(:admin) }
       let(:nodes) do
         [
             {
@@ -76,7 +76,6 @@ do |resource_symbol, presenter_factory|
       end
 
       it "persists order" do
-        pending "Waiting for implementation"
         post :save_structure, params: {nodes: nodes, id: resource.id, label: "TOP!"}
 
         expect(response.status).to eq 200
@@ -84,6 +83,5 @@ do |resource_symbol, presenter_factory|
         .to eq({ "label": "TOP!", "nodes": nodes }.with_indifferent_access)
       end
     end
-
   end
 end
