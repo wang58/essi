@@ -9,7 +9,7 @@ do |resource_symbol, presenter_factory|
     let(:user) { FactoryBot.create(:user) }
 
     before { sign_in user }
-    describe "#structure" do
+    describe "#structure", :clean do
 
       let(:solr) { ActiveFedora.solr.conn }
       let(:resource) do
@@ -51,7 +51,7 @@ do |resource_symbol, presenter_factory|
       end
     end
 
-    describe "#save_structure" do
+    describe "#save_structure", :clean do
 
       let(:resource) { FactoryBot.create(resource_symbol, user: user) }
       let(:file_set) { FactoryBot.create(:file_set, user: user) }
