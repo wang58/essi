@@ -3,7 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::ImagePresenter do
-  it "has tests" do
-    skip "Add your tests here"
-  end
+  # "Add your tests here"
 end
