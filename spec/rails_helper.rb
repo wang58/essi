@@ -33,6 +33,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+ActiveJob::Base.queue_adapter = :test
 
 # @note In January 2018, TravisCI disabled Chrome sandboxing in its Linux
 #       container build environments to mitigate Meltdown/Spectre
