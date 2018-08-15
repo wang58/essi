@@ -51,7 +51,7 @@ do |resource_symbol, presenter_factory|
       end
     end
 
-    describe "#save_structure", :clean do
+    describe "#save_structure", :clean, :perform_enqueued do
 
       let(:resource) { FactoryBot.create(resource_symbol, user: user) }
       let(:file_set) { FactoryBot.create(:file_set, user: user) }
