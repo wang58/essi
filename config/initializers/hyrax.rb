@@ -286,3 +286,16 @@ Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
 Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
 Qa::Authorities::Local.register_subauthority('languages', 'Qa::Authorities::Local::TableBasedAuthority')
 Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
+
+# Adding Hyrax's FactoryBot factories into the locations that definitions are initialized from.
+# This alleviates having to copy down common reusable factories.  To customize any factories
+# defined in the gem location, use the 'modify' method instead of 'define':
+#
+# FactoryBot.modify do
+#   factory :user do
+#     full_name     "Jane Doe"
+#     custom_attr        "Something"
+#   end
+# end
+hyrax_factories = File.join(Gem.loaded_specs['hyrax'].full_gem_path,"spec","factories")
+FactoryBot.definition_file_paths.unshift hyrax_factories
