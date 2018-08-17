@@ -1,6 +1,5 @@
-require 'factory_girl'
-
-FactoryGirl.define do
+# We use modify instead of define because the actual factory is defined in hyrax/spec/factories
+FactoryBot.modify do
   factory :user do
     sequence(:uid) { |n| "username#{n}" }
     sequence(:email) { |n| "email-#{srand}@test.com" }

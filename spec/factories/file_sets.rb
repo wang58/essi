@@ -1,6 +1,5 @@
-FactoryBot.define do
-  # The ::FileSet model is defined in spec/internal/app/models by the
-  # curation_concerns:install generator.
+# We use modify instead of define because the actual factory is defined in hyrax/spec/factories
+FactoryBot.modify do
   factory :file_set, class: FileSet do
 
     transient do
