@@ -15,6 +15,9 @@ class User < ApplicationRecord
   include LDAPGroupsLookup::Behavior
   alias_attribute :ldap_lookup_key, :username
 
+  # Provide dummy :password attribute to satisfy Hyrax FactoryBot factories
+  attr_accessor :password
+
   if Blacklight::Utils.needs_attr_accessible?
     attr_accessible :email, :password, :password_confirmation
   end
