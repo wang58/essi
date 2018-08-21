@@ -15,6 +15,9 @@ class BibRecord < ActiveFedora::Base
   # This model includes metadata properties specific to the BibRecord Work Type
   include Catorax::BibRecordMetadata
 
+  # Include properties for remote metadata lookup
+  include Catorax::RemoteLookupMetadata
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata

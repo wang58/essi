@@ -47,6 +47,8 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
@@ -74,3 +76,4 @@ gem 'omniauth-cas'
 gem 'ldap_groups_lookup', '~> 0.4.0'
 gem 'hydra-role-management'
 gem 'riiif', '~> 1.1'
+gem 'marc', '~> 1.0.0'

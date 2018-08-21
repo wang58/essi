@@ -4,7 +4,7 @@ module Hyrax
   # Generated form for BibRecord
   class BibRecordForm < Hyrax::Forms::WorkForm
     self.model_class = ::BibRecord
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :source_metadata_identifier]
     include Catorax::BibRecordFormBehavior
   end
 end

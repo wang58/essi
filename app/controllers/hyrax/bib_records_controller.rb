@@ -6,6 +6,7 @@ module Hyrax
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Catorax::BibRecordsControllerBehavior
+    include Catorax::RemoteMetadataLookupBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::BibRecord
 

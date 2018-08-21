@@ -17,6 +17,9 @@ class PagedResource < ActiveFedora::Base
   # This model includes metadata properties specific to the PagedResource Work Type
   include Catorax::PagedResourceMetadata
 
+  # Include properties for remote metadata lookup
+  include Catorax::RemoteLookupMetadata
+
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata

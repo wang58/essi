@@ -4,7 +4,7 @@ module Hyrax
   # Generated form for PagedResource
   class PagedResourceForm < Hyrax::Forms::WorkForm
     self.model_class = ::PagedResource
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :source_metadata_identifier]
     include Catorax::PagedResourceFormBehavior
   end
 end
