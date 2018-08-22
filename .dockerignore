@@ -1,0 +1,12 @@
+secrets
+docker.secrets
+.git
+.dockerignore
+tmp/*
+log/*
+db/development.sqlite3
+db/test.sqlite3
+coverage
+spec/tmp
+
+.idea
