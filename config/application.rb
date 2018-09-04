@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require File.expand_path('../../config/initializers/_catorax_config.rb', __FILE__)
+
 module Catorax
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

@@ -86,7 +86,7 @@ Hyrax.config do |config|
   # config.minter_statefile = '/tmp/minter-state'
 
   # Prefix for Redis keys
-  # config.redis_namespace = "hyrax"
+  config.redis_namespace = Catorax.config[:redis][:namespace]
 
   # Path to the file characterization tool
   # config.fits_path = "fits.sh"
@@ -187,7 +187,7 @@ Hyrax.config do |config|
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
-  # config.derivatives_path = Rails.root.join('tmp', 'derivatives')
+  config.derivatives_path = Catorax.config[:derivatives][:path]
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
@@ -297,5 +297,8 @@ Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::
 #     custom_attr        "Something"
 #   end
 # end
-hyrax_factories = File.join(Gem.loaded_specs['hyrax'].full_gem_path,"spec","factories")
-FactoryBot.definition_file_paths.unshift hyrax_factories
+
+if defined?(FactoryBot)
+  hyrax_factories = File.join(Gem.loaded_specs['hyrax'].full_gem_path,"spec","factories")
+  FactoryBot.definition_file_paths.unshift hyrax_factories
+end
