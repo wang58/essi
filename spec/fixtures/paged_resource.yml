@@ -1,0 +1,36 @@
+---
+:resource: PagedResource
+:attributes:
+  :default:
+    title:
+    - Untitled Paged Resource
+    state: final_review
+    viewing_direction: left-to-right
+    rights_statement:
+    - http://rightsstatements.org/vocab/NKC/1.0/
+    visibility: open
+  :local:
+    source_metadata_identifier:
+    viewing_direction: left-to-right
+:source_metadata:
+:thumbnail_path:
+:collections: []
+:structure:
+  :nodes:
+  - :label: Page 1
+    :nodes:
+    - :label: Page 1
+      :proxy: pg1
+:files:
+- :id: pg1
+  :mime_type: image/png
+  :path: "spec/fixtures/world.png"
+  :attributes:
+    :title:
+    - Page 1
+  :ocr_path: "spec/fixtures/fulltext.txt"
+  :file_opts: {}
+:sources:
+- :title:
+  - Contentdm XML
+  :file: "spec/fixtures/ocr.xml"

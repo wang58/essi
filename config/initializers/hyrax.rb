@@ -278,7 +278,8 @@ Hyrax.config do |config|
   # ingest files from the file system that are not part of the BrowseEverything
   # mount point.
   #
-  # config.whitelisted_ingest_dirs = []
+  config.whitelisted_ingest_dirs ||= []
+  config.whitelisted_ingest_dirs << Rails.root.join('spec', 'fixtures').to_s
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
@@ -302,3 +303,5 @@ if defined?(FactoryBot)
   hyrax_factories = File.join(Gem.loaded_specs['hyrax'].full_gem_path,"spec","factories")
   FactoryBot.definition_file_paths.unshift hyrax_factories
 end
+
+Hyrax::CurationConcern.actor_factory.swap Hyrax::Actors::CreateWithRemoteFilesActor, Catorax::Actors::CreateWithRemoteFilesActor
