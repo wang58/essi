@@ -25,4 +25,8 @@ class SolrDocument
   # Do content negotiation for AF models. 
 
   use_extension( Hydra::ContentNegotiation )
+
+  def holding_location
+    self[Solrizer.solr_name('holding_location')]
+  end
 end
