@@ -52,7 +52,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Added to get actor/job stack working in dev console, rake tasks
   # config.active_job.queue_adapter = :inline
-  config.active_job.queue_adapter = :sidekiq
 end
