@@ -43,7 +43,7 @@ test:
   fedora:
     user: fedoraAdmin
     password: fedoraAdmin
-    url: http://localhost:8986/rest
+    url: http://localhost:<%= ENV['FCREPO_TEST_PORT'] || 8986 %>/rest
     base_path: /test
   solr:
     url: http://localhost:8985/solr/hydra-test

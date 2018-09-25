@@ -78,9 +78,9 @@ jobs:
         - ./vendor/bundle
         key: dependencies-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
-    - run:
-        name: Call Rubocop
-        command: bundle exec rubocop
+#    - run:
+#        name: Call Rubocop
+#        command: bundle exec rubocop
 
     - run:
         name: Start headless Chrome

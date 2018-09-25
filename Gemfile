@@ -49,6 +49,7 @@ group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'rails-controller-testing'
   gem 'vcr'
   gem 'webmock'
