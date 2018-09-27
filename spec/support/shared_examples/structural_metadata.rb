@@ -55,8 +55,8 @@ RSpec.shared_examples "structural metadata" do
         ]
       }
     end
-    let(:resource1) { FactoryGirl.create(:file_set) }
-    let(:resource2) { FactoryGirl.create(:file_set) }
+    let(:resource1) { FactoryBot.create(:file_set) }
+    let(:resource2) { FactoryBot.create(:file_set) }
 
     it "is a resource that can have an order" do
       expect(curation_concern.logical_order).to be_kind_of LogicalOrderBase

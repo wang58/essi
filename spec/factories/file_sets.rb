@@ -4,7 +4,7 @@ FactoryBot.modify do
 
     transient do
       user { FactoryBot.create(:user) }
-      content nil
+      content { nil }
     end
 
     after(:create) do |file, evaluator|

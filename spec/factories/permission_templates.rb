@@ -52,23 +52,23 @@ FactoryBot.modify do
     end
 
     transient do
-      with_admin_set false
-      with_collection false
-      with_workflows false
-      with_active_workflow false
-      manage_users nil
-      manage_groups nil
-      deposit_users nil
-      deposit_groups nil
-      view_users nil
-      view_groups nil
+      with_admin_set { false }
+      with_collection { false }
+      with_workflows { false }
+      with_active_workflow { false }
+      manage_users { nil }
+      manage_groups { nil }
+      deposit_users { nil }
+      deposit_groups { nil }
+      view_users { nil }
+      view_groups { nil }
     end
   end
 
   class AccessHelper
     def self.create_access(permission_template_id, agent_type, access, agent_ids)
       agent_ids.each do |agent_id|
-        FactoryGirl.create(:permission_template_access,
+        FactoryBot.create(:permission_template_access,
                           access,
                           permission_template: permission_template_id,
                           agent_type: agent_type,

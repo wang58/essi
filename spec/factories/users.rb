@@ -3,7 +3,7 @@ FactoryBot.modify do
   factory :user do
     sequence(:uid) { |n| "username#{n}" }
     sequence(:email) { |n| "email-#{srand}@test.com" }
-    provider 'cas'
+    provider { 'cas' }
 
     factory :admin do
       roles { [Role.where(name: 'admin').first_or_create] }
@@ -30,12 +30,12 @@ FactoryBot.modify do
     end
 
     factory :complete_reviewer do
-      email 'complete@example.com'
+      email { 'complete@example.com' }
       roles { [Role.where(name: 'notify_complete').first_or_create] }
     end
 
     factory :takedown_reviewer do
-      email 'takedown@example.com'
+      email { 'takedown@example.com' }
       roles { [Role.where(name: 'notify_takedown').first_or_create] }
     end
   end
