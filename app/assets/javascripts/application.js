@@ -16,10 +16,20 @@
 // Required by Blacklight
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widgets/selectable
+//= require jquery-ui/widgets/sortable
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require blacklight/blacklight
 
-//= require_tree .
+//= require blacklight_gallery
+//= require cable
+//= require nestedSortable/jquery.mjs.nestedSortable
+//= require openseadragon
 //= require hyrax
+//= require_tree .
 
+Blacklight.onLoad(function() {
+  Initializer = require('catorax_boot')
+  window.catorax = new Initializer()
+})

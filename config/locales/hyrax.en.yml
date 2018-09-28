@@ -56,6 +56,8 @@ en:
     institution_name_full: The Institution Name
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+    structure_manager:
+      link_text: "Edit Structure"
     upload:
       browse_everything:
         browse_files_button: Upload from server

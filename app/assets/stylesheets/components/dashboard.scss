@@ -1,0 +1,16 @@
+/*
+ * for structure editor drag-and-drop interface
+ * overrides style from stock Hyrax dashboard.scss:222-246
+*/
+.dashboard {
+  .structure {
+    float: inherit;
+
+    .panel-heading,
+    .panel-footer,
+    .panel-body,
+    .list-group-item {
+      float: inherit;
+    }
+  }
+}
