@@ -13,7 +13,7 @@ require 'database_cleaner'
 require 'active_fedora/cleaner'
 require 'selenium-webdriver'
 require 'i18n/debug' if ENV['I18N_DEBUG']
-require 'byebug' unless ENV['TRAVIS']
+require 'byebug' unless ENV['CI']
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -81,6 +81,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Warden::Test::Helpers, type: :request
   config.include Warden::Test::Helpers, type: :feature
   config.include(ControllerLevelHelpers, type: :view)
   config.before(:each, type: :view) { initialize_controller_helpers(view) }
