@@ -31,10 +31,14 @@ ENTRYPOINT ["bundle", "exec"]
 
 # sidekiq image
 FROM catorax-deps as catorax-sidekiq
+ARG SOURCE_COMMIT
+ENV SOURCE_COMMIT $SOURCE_COMMIT
 CMD sidekiq
 
 # webserver image
 FROM catorax-deps as catorax-web
 RUN bundle exec rake assets:precompile
 EXPOSE 3000
+ARG SOURCE_COMMIT
+ENV SOURCE_COMMIT $SOURCE_COMMIT
 CMD puma -b tcp://0.0.0.0:3000
