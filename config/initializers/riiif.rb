@@ -24,3 +24,5 @@ Riiif.not_found_image = Rails.root.join('app', 'assets', 'images', 'us_404.svg')
 Riiif.unauthorized_image = Rails.root.join('app', 'assets', 'images', 'us_404.svg')
 
 Riiif::Engine.config.cache_duration_in_days = 365
+
+Riiif::Image.file_resolver.basic_auth_credentials = [Catorax.config[:fedora][:user], Catorax.config[:fedora][:password]]

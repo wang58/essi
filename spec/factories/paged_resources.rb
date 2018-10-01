@@ -15,5 +15,12 @@ FactoryBot.define do
     after(:build) do |work, evaluator|
       work.apply_depositor_metadata(evaluator.user.user_key)
     end
+
+    factory :paged_resource_with_one_image do
+      after(:build) do |work, evaluator|
+        work.ordered_members << create(:file_set, user: evaluator.user, content: File.open(RSpec.configuration.fixture_path + '/world.png'),
+                                       title: ['A Contained FileSet'], label: 'world.png')
+      end
+    end
   end
 end
