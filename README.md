@@ -1,3 +1,3 @@
-# Catorax [![Build Status](https://travis-ci.org/IUBLibTech/catorax.svg?branch=master)](https://travis-ci.org/IUBLibTech/catorax)
+# Catorax [![CircleCI](https://circleci.com/gh/IUBLibTech/catorax.svg?style=shield)](https://circleci.com/gh/IUBLibTech/catorax)
 
 A Samvera Hyrax based cataloging application
