@@ -1,0 +1,8 @@
+it:
+  hyrax:
+    icons:
+      scientific:     'fa fa-file-text-o'
+    select_type:
+      scientific:
+        description:        "Scientific opere"
+        name:               "Scientific"
