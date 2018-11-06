@@ -16,8 +16,8 @@
   <%= @presenter.holding_location %>
 <% end %>
 
-
-<%= presenter.attribute_to_html(:genus, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:phylum, render_as: :faceted, html_dl: true) %>
-
+<% fields =  Settings.work_types.to_hash['Scientific Work'.to_sym][:fields] %>
+<% fields.each do |field| %>
+  <%= presenter.attribute_to_html(field[0], render_as: :faceted, html_dl: true) %>
+<% end %>
 
