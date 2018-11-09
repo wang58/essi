@@ -100,7 +100,7 @@ do |resource_symbol, presenter_factory|
         let(:logical_order) { {} }
         let(:member_presenters) { [] }
 
-        pending 'returns a minimal structure section' do
+        it 'returns a minimal structure section' do
           get :manifest, params: { id: resource.id }
           structures = JSON.parse(response.body).dig('structures')
 
@@ -127,7 +127,7 @@ do |resource_symbol, presenter_factory|
                       nodes: [{ proxy: fs2.id }] }] }
         end
 
-        pending 'returns a content-bearing structure section' do
+        it 'returns a content-bearing structure section' do
           get :manifest, params: { id: resource.id }
           structures = JSON.parse(response.body).dig('structures')
 

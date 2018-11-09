@@ -31,6 +31,18 @@ class WithProxyForObject < SimpleDelegator
     end
   end
 
+  def to_manifest_range
+    ManifestRange.new(label: label, ranges: ranges, file_set_presenters: file_set_presenters)
+  end
+
+  def ranges
+    @ranges ||= nodes.select { |n| n.proxy_for_id.nil? }.map(&:to_manifest_range)
+  end
+
+  def file_set_presenters
+    @file_set_presenters ||= nodes.map(&:proxy_for_object).select(&:present?)
+  end
+
   private
 
     def all_nodes
@@ -51,3 +63,13 @@ class WithProxyForObject < SimpleDelegator
       end
     end
 end
+
+class ManifestRange
+  attr_reader :label, :ranges, :file_set_presenters
+  def initialize(label:, ranges: [], file_set_presenters: [])
+    @label = label
+    @ranges = ranges
+    @file_set_presenters = file_set_presenters
+  end
+end
+
