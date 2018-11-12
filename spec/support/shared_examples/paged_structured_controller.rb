@@ -59,10 +59,10 @@ do |resource_symbol, presenter_factory|
       let(:nodes) do
         [
             {
-                "label": "Chapter 1",
-                "nodes": [
+                'label': 'Chapter 1',
+                'nodes': [
                     {
-                        "proxy": file_set.id
+                        'proxy': file_set.id
                     }
                 ]
             }
@@ -80,7 +80,74 @@ do |resource_symbol, presenter_factory|
 
         expect(response.status).to eq 200
         expect(resource.reload.logical_order.order) \
-        .to eq({ "label": "TOP!", "nodes": nodes }.with_indifferent_access)
+        .to eq({ 'label': 'TOP!', 'nodes': nodes }.with_indifferent_access)
+      end
+    end
+
+    describe '#manifest', :clean do
+      let(:resource) { FactoryBot.create(resource_symbol) }
+      let(:fs1) { FactoryBot.create(:file_set, user: user) }
+      let(:fs2) { FactoryBot.create(:file_set, user: user) }
+
+      before do
+        allow_any_instance_of(presenter_factory) \
+          .to receive(:logical_order).and_return(logical_order)
+        allow_any_instance_of(presenter_factory) \
+          .to receive(:member_presenters).and_return(member_presenters)
+      end
+
+      context 'without structured content' do
+        let(:logical_order) { {} }
+        let(:member_presenters) { [] }
+
+        pending 'returns a minimal structure section' do
+          get :manifest, params: { id: resource.id }
+          structures = JSON.parse(response.body).dig('structures')
+
+          expect(structures.first['label']).to be_blank
+          expect(structures.first['ranges']).to be_blank
+          expect(structures.first['canvases']).to be_blank
+        end
+      end
+
+      context 'with structured content' do
+        let(:member_presenters) do
+          [fs1, fs2].map do |fs|
+            solr_doc = SolrDocument.new(fs.to_solr)
+            ability = Ability.new(user)
+            Hyrax::FileSetPresenter.new(solr_doc, ability)
+          end
+        end
+        let(:logical_order) do
+          { label: 'Logical',
+            nodes: [{ label: 'Section 1',
+                      nodes: [{ label: 'Subsection A',
+                                nodes: [{ proxy: fs1.id }] }] },
+                    { label: 'Section 2',
+                      nodes: [{ proxy: fs2.id }] }] }
+        end
+
+        pending 'returns a content-bearing structure section' do
+          get :manifest, params: { id: resource.id }
+          structures = JSON.parse(response.body).dig('structures')
+
+          expect(structures[0]['label']).to eq 'Logical'
+          expect(structures[0]['ranges']).to match [structures[1]['@id'],
+                                                    structures[3]['@id']]
+          expect(structures[0]['canvases']).to be_empty
+
+          expect(structures[1]['label']).to eq 'Section 1'
+          expect(structures[1]['ranges']).to match [structures[2]['@id']]
+          expect(structures[1]['canvases']).to be_empty
+
+          expect(structures[2]['label']).to eq 'Subsection A'
+          expect(structures[2]['ranges']).to be_empty
+          expect(structures[2]['canvases'].first).to match fs1.id
+
+          expect(structures[3]['label']).to eq 'Section 2'
+          expect(structures[3]['ranges']).to be_empty
+          expect(structures[3]['canvases'].first).to match fs2.id
+        end
       end
     end
   end
