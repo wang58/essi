@@ -1,6 +1,6 @@
 default: &default
   adapter: async
-  url: redis://<%= Catorax.config[:redis][:host] %>:<%= Catorax.config[:redis][:port] %>/1
+  url: redis://<%= ESSI.config[:redis][:host] %>:<%= ESSI.config[:redis][:port] %>/1
 
 development:
   <<: *default
@@ -11,4 +11,4 @@ test:
 production:
   <<: *default
   adapter: redis
-  channel_prefix: <%= Catorax.config[:redis][:namespace] %>
+  channel_prefix: <%= ESSI.config[:redis][:namespace] %>

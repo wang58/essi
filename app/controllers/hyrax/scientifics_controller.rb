@@ -5,7 +5,7 @@ module Hyrax
   class ScientificsController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
-    include Catorax::ScientificsControllerBehavior
+    include ESSI::ScientificsControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::Scientific
 

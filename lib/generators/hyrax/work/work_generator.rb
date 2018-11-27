@@ -121,11 +121,11 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
           say_status("info", "Modules are being created for #{class_name} that can be included in other work types", :blue)
 
           # Create archetype modules
-          template('controller_behavior.rb.erb', File.join('app/controllers/concerns/catorax', class_path, "#{plural_file_name}_controller_behavior.rb"))
-          template('model_behavior.rb.erb', File.join('app/models/concerns/catorax', class_path, "#{file_name}_behavior.rb"))
-          template('metadata.rb.erb', File.join('app/models/concerns/catorax', class_path, "#{file_name}_metadata.rb"))
-          template('form_behavior.rb.erb', File.join('app/forms/concerns/catorax', class_path, "#{file_name}_form_behavior.rb"))
-          template('indexer_behavior.rb.erb', File.join('app/indexers/concerns/catorax', class_path, "#{file_name}_indexer_behavior.rb"))
+          template('controller_behavior.rb.erb', File.join('app/controllers/concerns/essi', class_path, "#{plural_file_name}_controller_behavior.rb"))
+          template('model_behavior.rb.erb', File.join('app/models/concerns/essi', class_path, "#{file_name}_behavior.rb"))
+          template('metadata.rb.erb', File.join('app/models/concerns/essi', class_path, "#{file_name}_metadata.rb"))
+          template('form_behavior.rb.erb', File.join('app/forms/concerns/essi', class_path, "#{file_name}_form_behavior.rb"))
+          template('indexer_behavior.rb.erb', File.join('app/indexers/concerns/essi', class_path, "#{file_name}_indexer_behavior.rb"))
 
           # We still need to mixin the new archetype modules to the new work type by the same name later
           @archetype_name = class_name
@@ -133,7 +133,7 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
       end
 
       begin
-        class_file = "concerns/catorax/#{@archetype_name.underscore}_behavior.rb"
+        class_file = "concerns/essi/#{@archetype_name.underscore}_behavior.rb"
         require "#{class_file}"
 
         # Inject mixins to classes unless a valid archetype is specified.
@@ -143,18 +143,18 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
         # Insert archetype module mixins into new work type classes
         in_root do
           target_file = File.join('app/models/', class_path, "#{file_name}.rb")
-          inject_into_file target_file, "  include Catorax::#{@archetype_name}Behavior\n", after: "ActiveFedora::Base\n"
+          inject_into_file target_file, "  include ESSI::#{@archetype_name}Behavior\n", after: "ActiveFedora::Base\n"
           inject_into_file target_file, metadata_mixin, after: /validates.*\n/
 
           target_file = File.join('app/controllers/hyrax', class_path, "#{plural_file_name}_controller.rb")
-          inject_into_file target_file, "    include Catorax::#{@archetype_name.pluralize}ControllerBehavior\n", after: "WorksControllerBehavior\n"
+          inject_into_file target_file, "    include ESSI::#{@archetype_name.pluralize}ControllerBehavior\n", after: "WorksControllerBehavior\n"
           gsub_file target_file, "#{class_name}Presenter", "#{@archetype_name}Presenter"
 
           target_file = File.join('app/indexers', class_path, "#{file_name}_indexer.rb")
-          inject_into_file target_file, "  include Catorax::#{@archetype_name}IndexerBehavior\n", after: "IndexesBasicMetadata\n"
+          inject_into_file target_file, "  include ESSI::#{@archetype_name}IndexerBehavior\n", after: "IndexesBasicMetadata\n"
 
           target_file = File.join('app/forms/hyrax', class_path, "#{file_name}_form.rb")
-          inject_into_file target_file, "    include Catorax::#{@archetype_name}FormBehavior\n", after: "[:resource_type]\n"
+          inject_into_file target_file, "    include ESSI::#{@archetype_name}FormBehavior\n", after: "[:resource_type]\n"
 
           # Ignore broken scenario in generated feature test for work types.
           # When multiple work types exist the UI control for creating works changes from a simple button
@@ -198,9 +198,9 @@ class Hyrax::WorkGenerator < Rails::Generators::NamedBase
 
     def metadata_mixin
       "\n # Include extended metadata common to most Work Types\n" \
-          "  include Catorax::ExtendedMetadata\n" \
+          "  include ESSI::ExtendedMetadata\n" \
       "\n  # This model includes metadata properties specific to the #{@archetype_name} Work Type\n" \
-          "  include Catorax::#{@archetype_name}Metadata\n"
+          "  include ESSI::#{@archetype_name}Metadata\n"
     end
 
     def controller_mixin

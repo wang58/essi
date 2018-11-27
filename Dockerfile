@@ -1,5 +1,5 @@
 # system dependency image
-FROM ruby:2.5 AS catorax-sys-deps
+FROM ruby:2.5 AS essi-sys-deps
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
@@ -13,7 +13,7 @@ RUN mkdir -p /opt/fits && \
 ENV PATH /opt/fits:$PATH
 
 # ruby dependencies image
-FROM catorax-sys-deps AS catorax-deps
+FROM essi-sys-deps AS essi-deps
 
 RUN mkdir /app
 WORKDIR /app
@@ -30,13 +30,13 @@ ENV RAILS_ENV production
 ENTRYPOINT ["bundle", "exec"]
 
 # sidekiq image
-FROM catorax-deps as catorax-sidekiq
+FROM essi-deps as essi-sidekiq
 ARG SOURCE_COMMIT
 ENV SOURCE_COMMIT $SOURCE_COMMIT
 CMD sidekiq
 
 # webserver image
-FROM catorax-deps as catorax-web
+FROM essi-deps as essi-web
 RUN bundle exec rake assets:precompile
 EXPOSE 3000
 ARG SOURCE_COMMIT

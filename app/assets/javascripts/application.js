@@ -30,6 +30,6 @@
 //= require_tree .
 
 Blacklight.onLoad(function() {
-  Initializer = require('catorax_boot')
-  window.catorax = new Initializer()
+  Initializer = require('essi_boot')
+  window.essi = new Initializer()
 })

@@ -1,7 +1,7 @@
 # Generated via
 #  `rails generate hyrax:work BibRecord`
 class BibRecord < ActiveFedora::Base
-  include Catorax::BibRecordBehavior
+  include ESSI::BibRecordBehavior
   include ::Hyrax::WorkBehavior
 
   self.indexer = BibRecordIndexer
@@ -10,13 +10,13 @@ class BibRecord < ActiveFedora::Base
   validates :title, presence: { message: 'Your work must have a title.' }
 
  # Include extended metadata common to most Work Types
-  include Catorax::ExtendedMetadata
+  include ESSI::ExtendedMetadata
 
   # This model includes metadata properties specific to the BibRecord Work Type
-  include Catorax::BibRecordMetadata
+  include ESSI::BibRecordMetadata
 
   # Include properties for remote metadata lookup
-  include Catorax::RemoteLookupMetadata
+  include ESSI::RemoteLookupMetadata
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)

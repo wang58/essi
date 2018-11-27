@@ -1,3 +1,3 @@
-# Catorax [![CircleCI](https://circleci.com/gh/IUBLibTech/catorax.svg?style=shield)](https://circleci.com/gh/IUBLibTech/catorax)
+# ESS Images [![CircleCI](https://circleci.com/gh/IU-Libraries-Joint-Development/essi.svg?style=svg)](https://circleci.com/gh/IU-Libraries-Joint-Development/essi)
 
-A Samvera Hyrax based cataloging application
+A Samvera Hyrax based image cataloging application.

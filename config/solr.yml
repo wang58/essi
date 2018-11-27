@@ -1,5 +1,5 @@
 default: &default
-  url: <%= Catorax.config[:solr][:url] %>
+  url: <%= ESSI.config[:solr][:url] %>
 development:
   <<: *default
 test:

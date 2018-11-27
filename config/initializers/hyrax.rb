@@ -88,7 +88,7 @@ Hyrax.config do |config|
   # config.minter_statefile = '/tmp/minter-state'
 
   # Prefix for Redis keys
-  config.redis_namespace = Catorax.config[:redis][:namespace]
+  config.redis_namespace = ESSI.config[:redis][:namespace]
 
   # Path to the file characterization tool
   # config.fits_path = "fits.sh"
@@ -189,7 +189,7 @@ Hyrax.config do |config|
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
-  config.derivatives_path = Catorax.config[:derivatives][:path]
+  config.derivatives_path = ESSI.config[:derivatives][:path]
 
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
@@ -306,4 +306,4 @@ if defined?(FactoryBot)
   FactoryBot.definition_file_paths.unshift hyrax_factories
 end
 
-Hyrax::CurationConcern.actor_factory.swap Hyrax::Actors::CreateWithRemoteFilesActor, Catorax::Actors::CreateWithRemoteFilesActor
+Hyrax::CurationConcern.actor_factory.swap Hyrax::Actors::CreateWithRemoteFilesActor, ESSI::Actors::CreateWithRemoteFilesActor

@@ -1,4 +1,4 @@
-namespace :catorax do
+namespace :essi do
   desc "Ingest a YAML file"
   task ingest: :environment do |task, args|
     file = ARGV[1]

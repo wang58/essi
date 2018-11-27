@@ -5,6 +5,6 @@ module Hyrax
   class BibRecordForm < Hyrax::Forms::WorkForm
     self.model_class = ::BibRecord
     self.terms += [:resource_type, :source_metadata_identifier]
-    include Catorax::BibRecordFormBehavior
+    include ESSI::BibRecordFormBehavior
   end
 end
