@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="navbar-text text-left">
         <p><%= t('hyrax.footer.service_html') %></p>
-        <p><%= t('hyrax.product_name') %> v<%= Hyrax::VERSION %> Catorax <%= ENV['SOURCE_COMMIT'] %></p>
+        <p><%= t('hyrax.product_name') %> <%= link_to "v#{Hyrax::VERSION}", "https://github.com/samvera/hyrax/tree/v#{Hyrax::VERSION}" %>
+          Catorax <%= link_to ENV['SOURCE_COMMIT'], "https://github.com/IUBLibTech/catorax/tree/#{ENV['SOURCE_COMMIT']}" %></p>
     </div>
     <div class="navbar-right">
       <div class="navbar-text text-right">

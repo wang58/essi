@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::PagedResourcesController do
-  include_examples("paged_structure persister",
+  include_examples('paged_structure persister',
                    :paged_resource,
                    Hyrax::PagedResourcePresenter)
   include_examples('update metadata remotely', :paged_resource)

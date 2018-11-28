@@ -33,3 +33,12 @@ RSpec.shared_examples "PagedResource Properties" do
     expect(subject).to respond_to(:viewing_direction)
   end
 end
+
+RSpec.shared_examples "Scientific Properties" do
+  it "includes extended Darwin Core metadata" do
+    # Comes from including Catorax::ScientificMetadata
+    # Test a small subset of the properties available.
+    expect(subject).to respond_to(:kingdom)
+    expect(subject).to respond_to(:phylum)
+  end
+end

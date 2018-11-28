@@ -1,0 +1,8 @@
+pt-BR:
+  hyrax:
+    icons:
+      scientific:     'fa fa-file-text-o'
+    select_type:
+      scientific:
+        description:        "Scientific trabalhos"
+        name:               "Scientific"
