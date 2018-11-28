@@ -20,4 +20,14 @@ class Users::SessionsController < Devise::SessionsController
     path = options[:logout_url] || '/logout'
     redirect_to "https://#{host}#{path}"
   end
+
+  def become
+    #return unless current_user.is_an_admin?
+    sign_in(:user, User.find(2))
+    redirect_to root_url # or user_root_url
+  end
+
+  def log_in_as
+    
+  end
 end

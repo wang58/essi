@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
         mount BrowseEverything::Engine => '/browse'
-  
+
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
   mount Blacklight::Engine => '/'
   mount Hydra::RoleManagement::Engine => '/'
-  
+
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         as: :destroy_global_session)
     get 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
     get 'users/auth/cas', to: 'users/omniauth_authorize#passthru', defaults: { provider: :cas }, as: "new_user_session"
+    get 'sign_in_as', to: 'users/sessions#become', as: :sign_in_as
+    get 'users/sessions/log_in_as', to: 'users/sessions#log_in_as', as: :log_in_as
   end
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'

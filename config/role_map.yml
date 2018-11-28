@@ -1,7 +1,9 @@
 development:
   archivist:
     - archivist1@example.com
-
+  admin:
+    - andjsmit@iupui.edu
+    - andjsmit@indiana.edu
 test:
   archivist:
     - archivist1@example.com
