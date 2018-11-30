@@ -36,11 +36,11 @@ SwitchUser.setup do |config|
 
   # redirect_path is a block, it returns which page will be redirected
   # after switching a user.
-  config.redirect_path = ->(_request, _params) { '/' }
+  config.redirect_path = ->(_request, _params) { '/users/sessions/log_in_as' }
 
   # helper_with_guest is a boolean value, if it set to false
   # the guest item in the helper won't be shown
-  config.helper_with_guest = true
+  config.helper_with_guest = false
 
   # false = login from one scope to another and you are logged in only in both scopes
   # true = you are logged only into one scope at a time
