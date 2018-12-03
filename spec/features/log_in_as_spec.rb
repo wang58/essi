@@ -14,7 +14,7 @@ RSpec.feature 'Switch User' do
 
   scenario 'Non-admin user is not allowed to see switch user form' do
     visit '/users/sessions/log_in_as'
-    expect(page).to have_no_selector('select')
+    expect(page).to have_no_selector('select#switch_user_identifier')
   end
 
   scenario 'Admin user is allowed to see switch user form' do
