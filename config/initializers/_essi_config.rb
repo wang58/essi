@@ -8,7 +8,7 @@ private
   def config_yaml
     load_yaml File.read('/run/secrets/essi_config.yml')
   rescue Errno::ENOENT
-    load_yaml File.read(File.join(Rails.root, 'essi_config.example.yml'))
+    load_yaml File.read(Rails.root.join('config', 'essi_config.example.yml'))
   end
 
   def load_yaml(str)
