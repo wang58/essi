@@ -60,7 +60,8 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = [auth.uid,'@indiana.edu'].join
+      user.email = user.try(:ldap_mail)
+      user.email = [auth.uid,'@indiana.edu'].join if user.email.blank?
     end
   end
 end
