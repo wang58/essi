@@ -1,8 +1,8 @@
 default: &default
-  user: <%= Catorax.config[:fedora][:user] %>
-  password: <%= Catorax.config[:fedora][:password] %>
-  url: <%= Catorax.config[:fedora][:url] %>
-  base_path: <%= Catorax.config[:fedora][:base_path] %>
+  user: <%= ESSI.config[:fedora][:user] %>
+  password: <%= ESSI.config[:fedora][:password] %>
+  url: <%= ESSI.config[:fedora][:url] %>
+  base_path: <%= ESSI.config[:fedora][:base_path] %>
 development:
   <<: *default
 test:

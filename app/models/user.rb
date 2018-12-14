@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   def groups
     g = roles.map(&:name)
-    if Catorax.config[:authorized_ldap_groups].blank?
+    if ESSI.config[:authorized_ldap_groups].blank?
       g += ['registered'] unless new_record? || guest?
     elsif music_patron?
       g += ['registered']
@@ -48,7 +48,7 @@ class User < ApplicationRecord
     if force_update == :force ||
         authorized_membership_updated_at.nil? ||
         authorized_membership_updated_at < Time.now - 1.day
-      groups = Catorax.config[:authorized_ldap_groups] || []
+      groups = ESSI.config[:authorized_ldap_groups] || []
       self.authorized_membership = member_of_ldap_group?(groups)
       self.authorized_membership_updated_at = Time.now
       save

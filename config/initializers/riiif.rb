@@ -25,4 +25,4 @@ Riiif.unauthorized_image = Rails.root.join('app', 'assets', 'images', 'us_404.sv
 
 Riiif::Engine.config.cache_duration = 365.days
 
-Riiif::Image.file_resolver.basic_auth_credentials = [Catorax.config[:fedora][:user], Catorax.config[:fedora][:password]]
+Riiif::Image.file_resolver.basic_auth_credentials = [ESSI.config[:fedora][:user], ESSI.config[:fedora][:password]]

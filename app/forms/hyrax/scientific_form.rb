@@ -5,6 +5,6 @@ module Hyrax
   class ScientificForm < Hyrax::Forms::WorkForm
     self.model_class = ::Scientific
     self.terms += [:resource_type]
-    include Catorax::ScientificFormBehavior
+    include ESSI::ScientificFormBehavior
   end
 end

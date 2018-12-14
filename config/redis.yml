@@ -1,6 +1,6 @@
 default: &default
-  host: <%= Catorax.config[:redis][:host] %>
-  port: <%= Catorax.config[:redis][:port] %>
+  host: <%= ESSI.config[:redis][:host] %>
+  port: <%= ESSI.config[:redis][:port] %>
 development:
   <<: *default
 test:

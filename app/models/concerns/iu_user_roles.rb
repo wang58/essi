@@ -22,7 +22,7 @@ module IuUserRoles
   end
 
   def music_patron?
-    campus_patron? && (Catorax.config[:authorized_ldap_groups].blank? ||
+    campus_patron? && (ESSI.config[:authorized_ldap_groups].blank? ||
                        authorized_ldap_member?)
   end
 

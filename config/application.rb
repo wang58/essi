@@ -6,9 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require File.expand_path('../../config/initializers/_catorax_config.rb', __FILE__)
+require File.expand_path('../../config/initializers/_essi_config.rb', __FILE__)
 
-module Catorax
+module ESSI
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1

@@ -5,7 +5,7 @@ module Hyrax
   class ImagesController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
-    include Catorax::ImagesControllerBehavior
+    include ESSI::ImagesControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     self.curation_concern_type = ::Image
 

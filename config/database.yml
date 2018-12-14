@@ -1,9 +1,9 @@
 default: &default
-  adapter: <%= Catorax.config[:db][:adapter] %>
-  host: <%= Catorax.config[:db][:host] %>
-  database: <%= Catorax.config[:db][:database] %>
-  username: <%= Catorax.config[:db][:user] %>
-  password: <%= Catorax.config[:db][:password] %>
+  adapter: <%= ESSI.config[:db][:adapter] %>
+  host: <%= ESSI.config[:db][:host] %>
+  database: <%= ESSI.config[:db][:database] %>
+  username: <%= ESSI.config[:db][:user] %>
+  password: <%= ESSI.config[:db][:password] %>
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000

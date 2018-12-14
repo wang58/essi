@@ -5,7 +5,7 @@ RSpec.describe 'IIIF image API', type: :request do
   let(:work) { FactoryBot.create(:paged_resource_with_one_image, user: user) }
   let(:file_set) { work.ordered_members.to_a.first }
   let(:file) { file_set.original_file }
-  let(:auth_params) { [Catorax.config[:fedora][:user], Catorax.config[:fedora][:password]] }
+  let(:auth_params) { [ESSI.config[:fedora][:user], ESSI.config[:fedora][:password]] }
 
   describe 'GET /images/:id' do
 

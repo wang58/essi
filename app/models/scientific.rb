@@ -1,7 +1,7 @@
 # Generated via
 #  `rails generate hyrax:work Scientific`
 class Scientific < ActiveFedora::Base
-  include Catorax::ScientificBehavior
+  include ESSI::ScientificBehavior
   include ::Hyrax::WorkBehavior
 
   self.indexer = ScientificIndexer
@@ -10,10 +10,10 @@ class Scientific < ActiveFedora::Base
   validates :title, presence: { message: 'Your work must have a title.' }
 
  # Include extended metadata common to most Work Types
-  include Catorax::ExtendedMetadata
+  include ESSI::ExtendedMetadata
 
   # This model includes metadata properties specific to the Scientific Work Type
-  include Catorax::ScientificMetadata
+  include ESSI::ScientificMetadata
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
