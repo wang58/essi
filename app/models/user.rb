@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   # Enable ADS group lookup
   include LDAPGroupsLookup::Behavior
-  alias_attribute :ldap_lookup_key, :username
+  alias_attribute :ldap_lookup_key, :uid
 
   # Provide dummy :password attribute to satisfy Hyrax FactoryBot factories
   attr_accessor :password
@@ -60,7 +60,8 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = [auth.uid,'@indiana.edu'].join
+      user.email = user.try(:ldap_mail)
+      user.email = [auth.uid, ESSI.config.dig(:ldap, :default_email_domain)].join if user.email.blank?
     end
   end
 end
