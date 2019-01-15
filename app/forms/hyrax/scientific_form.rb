@@ -5,7 +5,7 @@ module Hyrax
   class ScientificForm < Hyrax::Forms::WorkForm
     self.model_class = ::Scientific
     self.terms += [:resource_type]
-    fields =  Settings.work_types.to_hash['Scientific Work'.to_sym][:fields]
+    fields = WorkTypeService.fields_for model_name.name
     fields.each do |field|
       self.terms += [field[0]]
     end

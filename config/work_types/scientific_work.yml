@@ -1,5 +1,5 @@
 work_types:
-  Scientific Work:
+  Scientific:
     fields:
       phylum: "phylum"
       genus: "genus"
