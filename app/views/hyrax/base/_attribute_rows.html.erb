@@ -16,4 +16,8 @@
   <%= @presenter.holding_location %>
 <% end %>
 
+<% fields =  Settings.work_types.to_hash['Scientific Work'.to_sym][:fields] %>
+<% fields.each do |field| %>
+  <%= presenter.attribute_to_html(field[0], render_as: :faceted, html_dl: true) %>
+<% end %>
 

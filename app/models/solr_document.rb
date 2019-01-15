@@ -29,4 +29,10 @@ class SolrDocument
   def holding_location
     self[Solrizer.solr_name('holding_location')]
   end
+
+  #scientific fields
+
+  attribute :phylum, Solr::Array, solr_name('phylum')
+  attribute :genus, Solr::Array, solr_name('genus')
+
 end
