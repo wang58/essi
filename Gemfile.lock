@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/IU-Libraries-Joint-Development/ScoobySnacks.git
+  revision: 0eaeb05882748f8d79903ad63a8bab75ae2f3518
+  branch: ESSI-59
+  specs:
+    scooby_snacks (0.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -876,6 +883,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   sass-rails (~> 5.0)
+  scooby_snacks!
   selenium-webdriver
   sidekiq
   solr_wrapper (>= 0.3)

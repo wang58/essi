@@ -2,6 +2,8 @@
 #  `rails generate hyrax:work PagedResource`
 module Hyrax
   class PagedResourcePresenter < Hyrax::WorkShowPresenter
+    include ScoobySnacks::PresenterBehavior
+
     def holding_location
       HoldingLocationAttributeRenderer.new(solr_document.holding_location).render_dl_row
     end

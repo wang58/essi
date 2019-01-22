@@ -6,5 +6,6 @@ module Hyrax
     self.model_class = ::PagedResource
     self.terms += [:resource_type, :source_metadata_identifier]
     include ESSI::PagedResourceFormBehavior
+    include ScoobySnacks::WorkFormBehavior
   end
 end

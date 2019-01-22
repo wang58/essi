@@ -1,0 +1,11 @@
+<% property = ScoobySnacks::METADATA_SCHEMA.with_indifferent_access['work_types'][curation_concern.class.human_readable_type.downcase.gsub(' ','_')]['properties'][key.to_s] %>
+<% unless property.nil?  %>
+    <% options = {required: property['required'] == "true"} %>
+    <% options[:label] = property['label'] unless property.nil? %>
+    <% options[:hint] = property['hint'] if property['hint'] %>
+    <% input_type = property['input'] %>
+    <% input_type = 'scalar' if input_type == "default" %>
+    <%= render partial: "records/edit_fields/#{input_type}", locals: {property: property, f: f, options: options, key: key}  %>
+<% else %>
+    <%= "model_name: #{curation_concern.class.human_readable_type.downcase.gsub(' ', '_')}, key: #{key}, propertes: #{ScoobySnacks::METADATA_SCHEMA['work_types'][curation_concern.class.human_readable_type.downcase.gsub(' ', '_')]['properties']['title']}"%>  
+<% end %>

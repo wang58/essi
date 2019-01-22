@@ -6,5 +6,6 @@ module Hyrax
     self.model_class = ::BibRecord
     self.terms += [:resource_type, :source_metadata_identifier]
     include ESSI::BibRecordFormBehavior
+    include ScoobySnacks::WorkFormBehavior
   end
 end

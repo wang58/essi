@@ -6,5 +6,6 @@ module Hyrax
     self.model_class = ::Scientific
     self.terms += [:resource_type]
     include ESSI::ScientificFormBehavior
+    include ScoobySnacks::WorkFormBehavior
   end
 end
