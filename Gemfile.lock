@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/samvera-labs/dog_biscuits.git
+  revision: 07f612692deba94bfecf3d4854629871828b8a70
+  specs:
+    dog_biscuits (0.5.2)
+      hyrax (>= 2, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -856,6 +863,7 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.6)
   devise-i18n
+  dog_biscuits!
   factory_bot_rails
   fcrepo_wrapper
   hydra-role-management
