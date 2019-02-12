@@ -61,7 +61,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = user.try(:ldap_mail)
-      user.email = [auth.uid, ESSI.config.dig(:ldap, :default_email_domain)].join if user.email.blank?
+      user.email = [auth.uid, '@', ESSI.config.dig(:ldap, :default_email_domain)].join if user.email.blank?
     end
   end
 end
