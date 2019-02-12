@@ -16,6 +16,7 @@ Hyrax::FileSetDerivativesService.class_eval do
   private
 
   def create_hocr_derivatives(filename)
-    Rails.logger.info "Time to create a hOCR file for #{filename}"
+    Rails.logger.info "Time to create a hOCR file #{hocr_file} for #{filename}"
+    hocr_file = derivative_url('hocr')
   end
 end
