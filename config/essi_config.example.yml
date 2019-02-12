@@ -32,7 +32,7 @@ default: &default
     group_roles:
       admin:
         - ESSI-USERS
-    default_email_domain: indiana.edu
+    default_email_domain: iu.edu
   essi:
     notifier_email: example@test.test
     store_original_files: true
