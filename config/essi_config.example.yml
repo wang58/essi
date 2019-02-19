@@ -33,6 +33,8 @@ default: &default
       admin:
         - ESSI-USERS
     default_email_domain: iu.edu
+  authorized_ldap_groups:
+    - ESSI-USERS
   essi:
     notifier_email: example@test.test
     store_original_files: true
