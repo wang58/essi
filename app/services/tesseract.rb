@@ -4,7 +4,11 @@ class Tesseract
       language_output.split("\n")[1..-1].map(&:to_sym) \
                      .each_with_object({}) do |lang, hsh|
         hsh[lang] = label(lang)
-      end
+      end.with_indifferent_access
+    end
+
+    def try_languages(langs)
+      Array.wrap(langs).select { |lang| languages[lang].present? }.join('+')
     end
 
     private

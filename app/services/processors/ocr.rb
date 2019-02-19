@@ -20,7 +20,7 @@ module Processors
       end
 
       def language
-        directives.fetch(:language, :eng) # FIXME: config default value?
+        directives.fetch(:language, :eng)
       end
   end
 end
