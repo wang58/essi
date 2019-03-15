@@ -2,6 +2,8 @@
 class FileSet < ActiveFedora::Base
   include ::Hyrax::FileSetBehavior
 
+  self.indexer = ESSI::FileSetIndexer
+
   def ocr_language
     [language.entries,
      parent&.language&.entries,
