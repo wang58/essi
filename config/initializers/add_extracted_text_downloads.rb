@@ -19,8 +19,11 @@ end
 # Makes extracted text check available in file details.
 module FileSetPresenterExtensions
   def extracted_text?
-    return true if ::FileSet.find(id).extracted_text
-    false
+    ::FileSet.find(id).extracted_text.present?
+  end
+
+  def extracted_text_link
+    "/downloads/#{id}?file=extracted_text"
   end
 end
 
