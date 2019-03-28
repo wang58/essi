@@ -852,7 +852,7 @@ DEPENDENCIES
   factory_bot_rails
   fcrepo_wrapper
   hydra-role-management
-  hyrax (= 2.5.0)
+  hyrax (~> 2.5.0)
   iso-639
   jbuilder (~> 2.5)
   jquery-rails
