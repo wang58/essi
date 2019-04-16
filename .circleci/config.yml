@@ -2,18 +2,21 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
 
-default_environment: &default_environment
-  RAILS_ENV: test
-  RACK_ENV: test
-  FCREPO_TEST_PORT: 8080/fcrepo
-  BUNDLE_JOBS: 4
-  BUNDLE_RETRY: 3
-  NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-  ENGINE_CART_RAILS_OPTIONS: --skip-git --skip-bundle --skip-listen --skip-spring --skip-yarn --skip-keeps --skip-action-cable --skip-coffee --skip-puma --skip-test
-  SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
-  COVERALLS_PARALLEL: true
+orbs:
+  docker-publish: circleci/docker-publish@0.1.6
+
+#default_environment: &default_environment
+#  RAILS_ENV: test
+#  RACK_ENV: test
+#  FCREPO_TEST_PORT: 8080/fcrepo
+#  BUNDLE_JOBS: 4
+#  BUNDLE_RETRY: 3
+#  NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+#  ENGINE_CART_RAILS_OPTIONS: --skip-git --skip-bundle --skip-listen --skip-spring --skip-yarn --skip-keeps --skip-action-cable --skip-coffee --skip-puma --skip-test
+#  SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+#  COVERALLS_PARALLEL: true
 
 jobs:
   build:
@@ -34,10 +37,11 @@ jobs:
 
     working_directory: ~/repo
 
-    environment:
-      <<: *default_environment
+#    environment:
+#      <<: *default_environment
 
     steps:
+
     - restore_cache:
         keys:
         - source-v1-{{ .Branch }}-{{ .Revision }}
@@ -51,54 +55,62 @@ jobs:
         paths:
         - ".git"
 
-    # BUNDLE_PATH is unset to allow for `bundle config path` to take precedence.
-    - run:
-        name: Extra environment setup
-        command: |
-          echo 'unset BUNDLE_PATH' >> $BASH_ENV
+    - setup_remote_docker
 
-    - run:
-        name: Install system deps
-        command: |
-          sudo apt-get update -qq
-          sudo apt-get install -y build-essential default-jre-headless libpq-dev nodejs \
-                libreoffice-writer libreoffice-impress imagemagick unzip ghostscript \
-                tesseract-ocr
-          sudo mkdir -p -m 777 /opt/fits
-          curl -fSL -o /opt/fits/fits-1.4.0.zip https://github.com/harvard-lts/fits/releases/download/1.4.0/fits-1.4.0.zip
-          cd /opt/fits && unzip fits-1.4.0.zip && chmod +X fits.sh
-          echo 'export PATH=/opt/fits:$PATH' >> $BASH_ENV
+    - docker-publish/check
 
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - dependencies-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - dependencies-v1-{{ .Branch }}
-        - dependencies-v1-
+    - docker-publish/build:
+        image: iublibtech/essi
+        extra_build_args: --target essi-web
 
-    - run:
-        name: Install dependencies
-        command: |
-          gem update --system
-          gem update bundler
-          bundle config path $CIRCLE_WORKING_DIRECTORY/vendor/bundle
-          bundle install
-          bundle pristine chromedriver-helper
-          bundle clean
-
-    - save_cache:
-        paths:
-        - ./vendor/bundle
-        key: dependencies-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-
+#    # BUNDLE_PATH is unset to allow for `bundle config path` to take precedence.
+#    - run:
+#        name: Extra environment setup
+#        command: |
+#          echo 'unset BUNDLE_PATH' >> $BASH_ENV
+#
+#    - run:
+#        name: Install system deps
+#        command: |
+#          sudo apt-get update -qq
+#          sudo apt-get install -y build-essential default-jre-headless libpq-dev nodejs \
+#                libreoffice-writer libreoffice-impress imagemagick unzip ghostscript \
+#                tesseract-ocr
+#          sudo mkdir -p -m 777 /opt/fits
+#          curl -fSL -o /opt/fits/fits-1.4.0.zip https://github.com/harvard-lts/fits/releases/download/1.4.0/fits-1.4.0.zip
+#          cd /opt/fits && unzip fits-1.4.0.zip && chmod +X fits.sh
+#          echo 'export PATH=/opt/fits:$PATH' >> $BASH_ENV
+#
+#    # Download and cache dependencies
+#    - restore_cache:
+#        keys:
+#        - dependencies-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+#        - dependencies-v1-{{ .Branch }}
+#        - dependencies-v1-
+#
+#    - run:
+#        name: Install dependencies
+#        command: |
+#          gem update --system
+#          gem update bundler
+#          bundle config path $CIRCLE_WORKING_DIRECTORY/vendor/bundle
+#          bundle install
+#          bundle pristine chromedriver-helper
+#          bundle clean
+#
+#    - save_cache:
+#        paths:
+#        - ./vendor/bundle
+#        key: dependencies-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+#
 #    - run:
 #        name: Call Rubocop
 #        command: bundle exec rubocop
 
-    - run:
-        name: Start headless Chrome
-        command: google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
-        background: true
+#    - run:
+#        name: Start headless Chrome
+#        command: google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost
+#        background: true
 
     - run:
         name: Load config into SolrCloud
@@ -109,10 +121,14 @@ jobs:
           curl -H 'Content-type: application/json' http://localhost:8985/api/collections/ -d '{create: {name: hydra-test, config: hyrax, numShards: 1}}'
 
     - run:
-        name: Run rspec in parallel
-        command: |
-          mkdir /tmp/test-results
-          bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+        name: Run rspec in docker image
+        command: docker run --env-file .circleci/test_env_vars.list iublibtech/essi:$CIRCLE_SHA1 bundle exec rspec
+
+#    - run:
+#        name: Run rspec in parallel
+#        command: |
+#          mkdir /tmp/test-results
+#          bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
 
 

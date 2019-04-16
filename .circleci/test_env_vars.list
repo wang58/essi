@@ -1,0 +1,9 @@
+RAILS_ENV=test
+RACK_ENV=test
+FCREPO_TEST_PORT=8080/fcrepo
+BUNDLE_JOBS=4
+BUNDLE_RETRY=3
+NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+ENGINE_CART_RAILS_OPTIONS=--skip-git --skip-bundle --skip-listen --skip-spring --skip-yarn --skip-keeps --skip-action-cable --skip-coffee --skip-puma --skip-test
+SPEC_OPTS=--profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+COVERALLS_PARALLEL=true
