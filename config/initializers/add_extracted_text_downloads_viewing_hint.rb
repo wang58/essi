@@ -18,6 +18,8 @@ end
 
 # Makes extracted text check available in file details.
 module FileSetPresenterExtensions
+  delegate :viewing_hint, to: :solr_document
+
   def extracted_text?
     ::FileSet.find(id).extracted_text.present?
   end

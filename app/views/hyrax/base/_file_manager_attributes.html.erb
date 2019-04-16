@@ -1,1 +1,5 @@
 OCR Text Available: <%= ocr_check(node.id) %>
+
+<% if node.model_name.singular == "file_set" %>
+  <%= f.input :viewing_hint, collection: [:"", :"non-paged", :"facing-pages"], as: :radio_buttons, label: false, defaults: { input_html: { class: '' }}%>
+<% end %>

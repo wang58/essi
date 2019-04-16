@@ -4,6 +4,9 @@ class FileSet < ActiveFedora::Base
 
   self.indexer = ESSI::FileSetIndexer
 
+  # This model includes metadata properties specific to file sets
+  include ESSI::FileSetMetadata
+
   def ocr_language
     [language.entries,
      parent&.language&.entries,
