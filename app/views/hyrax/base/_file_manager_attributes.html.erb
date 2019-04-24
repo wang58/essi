@@ -2,7 +2,7 @@ OCR: <%= ocr_check(node.id) %>
 <div class="form-group radio_buttons file-manager-attributes">
   <span class="radio">
     <% if node.model_name.singular == "file_set" %>
-      <%= f.input :viewing_hint, collection: [:"", :"non-paged", :"facing-pages"], as: :radio_buttons, label: false, defaults: { input_html: { class: 'radio_buttons' }}%>
+      <%= f.input :viewing_hint, collection: [:"", :"non-paged", :"facing-pages"], as: :radio_buttons, label: false, defaults: { input_html: { name: "#{f.object.model_name.singular}[viewing_hint]", class: 'viewing_hint' }, value: node.viewing_hint.to_s}%>
     <% end %>
   </span>
 </div>
