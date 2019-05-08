@@ -1,8 +1,25 @@
 OCR: <%= ocr_check(node.id) %>
-<div class="form-group radio_buttons file-manager-attributes">
-  <span class="radio">
-    <% if node.model_name.singular == "file_set" %>
-      <%= f.input :viewing_hint, collection: [:"", :"non-paged", :"facing-pages"], as: :radio_buttons, label: false, defaults: { input_html: { name: "#{f.object.model_name.singular}[viewing_hint]", class: 'viewing_hint' }, value: node.viewing_hint.to_s}%>
-    <% end %>
-  </span>
+
+<% hints = ['', 'non-paged', 'facing-pages'] %>
+<% selected_hint = node.viewing_hint || hints.first %>
+<div class="form-group <%= f.object.model_name.singular %>_viewing_hint">
+  <%= f.input :viewing_hint,
+              as: :hidden,
+              input_html: { data: {member_link: "#{f.object.model_name.singular}_viewing_hint_#{node.id}"},
+                            value: selected_hint,
+                            id: "file_set_viewing_hint_#{node.id}"} %>
+  <% hints.each_with_index do |val, index| %>
+    <div class="radio">
+      <%= content_tag :label do %>
+        <%= tag :input,
+                name: "#{f.object.model_name.singular}_viewing_hint_#{node.id}",
+                id: "#{f.object.model_name.singular}_viewing_hint_#{node.id}_#{val}",
+                type: :radio,
+                value: val,
+                checked: (val == selected_hint),
+                class: 'resource-radio-button' %>
+        <%= val %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

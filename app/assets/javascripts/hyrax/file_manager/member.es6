@@ -34,7 +34,7 @@ export class FileManagerMember {
     this.save_manager = save_manager
     this.elements = []
     this.track_label()
-    this.track_viewing_hint()
+    this.track_hint()
   }
 
   push_changed(element) {
@@ -60,9 +60,14 @@ export class FileManagerMember {
     new InputTracker(this.element.find("input[type='text']"), this)
   }
 
-  track_viewing_hint() {
-    console.dir(this.element.find("div.file_set_viewing_hint input[type='hidden']"))
-    new InputTracker(this.element.find("div.file_set_viewing_hint input[type='hidden']"), this)
+  track_hint() {
+    new InputTracker(this.element.find("[data-member-link^=file_set_viewing_hint]"), this)
+    $("*[name^=file_set_viewing_hint").change(function() {
+      let name = $(this).attr('name')
+      let val = $("*[name=" + name + "]:checked").val()
+      $("[data-member-link=" + name + "]" ).val(val)
+      $("[data-member-link=" + name + "]" ).change()
+    })
   }
 
   persist() {
