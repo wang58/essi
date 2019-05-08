@@ -7,9 +7,13 @@ Hyrax::FileSetPresenter.class_eval do
 end
 
 module FileSetEditFormAddViewingHints
-  self.terms += [:viewing_hint]
+  def self.included(base)
+    base.class_eval do
+      self.terms += [:viewing_hint]
+    end
+  end
 end
 
-Hyrax::FileSetEditForm.call_eval do
-  prepend FileSetEditFormAddViewingHints
+Hyrax::Forms::FileSetEditForm.class_eval do
+  include FileSetEditFormAddViewingHints
 end
