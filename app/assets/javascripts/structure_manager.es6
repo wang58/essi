@@ -81,9 +81,9 @@ export default class StructureManager {
         dataType: "text",
         contentType: "application/json"
       }).done(function(data, textStatus) {
-        window.plum.flash.set("success", "Request complete: " + textStatus)
+        window.essi.flash.set("success", "Request complete: " + textStatus)
       }).fail(function(jqXHR, textStatus, errorThrown) {
-        window.plum.flash.set("danger", "Request failed: " + errorThrown)
+        window.essi.flash.set("danger", "Request failed: " + errorThrown)
       }).always(() => {
         button.text("Save")
         button.removeClass("disabled")
