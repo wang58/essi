@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   concern :iiif_search, BlacklightIiifSearch::Routes.new
@@ -50,6 +52,10 @@ Rails.application.routes.draw do
     collection do
       delete 'clear'
     end
+  end
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
