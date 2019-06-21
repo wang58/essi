@@ -29,6 +29,24 @@ module Hyrax
       Array.wrap(logical_order_object.to_manifest_range)
     end
 
+    # Copied from Hyrax gem
+    # IIIF metadata for inclusion in the manifest
+    #  Called by the `iiif_manifest` gem to add metadata
+    #
+    # @return [Array] array of metadata hashes
+    def manifest_metadata
+      metadata = []
+      Hyrax.config.iiif_metadata_fields.each do |field|
+        next if send(field).blank?
+
+        metadata << {
+          'label' => I18n.t("simple_form.labels.defaults.#{field}", default: field.to_s.humanize),
+          'value' => Array.wrap(send(field))
+        }
+      end
+      metadata
+    end
+
     private
       def logical_order_factory
         @logical_order_factory ||=
