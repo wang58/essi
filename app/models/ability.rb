@@ -21,4 +21,15 @@ class Ability
         can [:create, :show, :add_user, :remove_user, :index, :edit, :update, :destroy], Role
     end
   end
+
+  # Modified method from blacklight-access_controls Blacklight::AccessControls::Ability
+  # Grants registered status for authenticated visibility ("Institution") by ldap group membership, if so configured
+  def user_groups
+    return @user_groups if @user_groups
+
+    @user_groups = default_user_groups
+    @user_groups |= current_user.groups if current_user.respond_to? :groups
+    @user_groups |= ['registered'] if current_user.authorized_patron?
+    @user_groups
+  end
 end
