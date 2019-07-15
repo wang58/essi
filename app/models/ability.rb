@@ -23,7 +23,7 @@ class Ability
   end
 
   # Modified method from blacklight-access_controls Blacklight::AccessControls::Ability
-  # Grants registered status for authenticated visibility ("Institution") by ldap group membership, if so configured
+  # Grants registered status for authenticated visibility ("Institution") by ldap group membership, if so configured, and admins
   def user_groups
     return @user_groups if @user_groups
 

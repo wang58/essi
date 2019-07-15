@@ -35,10 +35,10 @@ class User < ApplicationRecord
   end
 
   # Modified method from hydra-role-management Hydra::RoleManagement::UserRoles
-  # Grants registered status for authenticated visibility ("Institution") by ldap group membership, if so configured
+  # Grants registered status for authenticated visibility ("Institution") by ldap group membership, if so configured, and admins
   def groups
     g = roles.map(&:name)
-    g += ['registered'] if authorized_patron?
+    g += ['registered'] if authorized_patron? || admin?
     g
   end
 
