@@ -103,8 +103,8 @@ export default class StructureManager {
   }
 
   toggle_thumbnails_button(){
-    let show_html = "<span class='glyphicon glyphicon-eye-open'></span> Show Thumbnails"
-    let hide_html = "<span class='glyphicon glyphicon-eye-close'></span> Hide Thumbnails"
+    let show_html = "<span class='glyphicon glyphicon-eye-open'></span> " + I18n.t('essi.structure.show_thumbnails')
+    let hide_html = "<span class='glyphicon glyphicon-eye-close'></span> " + I18n.t('essi.structure.hide_thumbnails')
     $("*[data-action=toggle-thumbnails]").click(function(event) {
       event.preventDefault()
       if($(".structure-thumbnail").is(':visible')){

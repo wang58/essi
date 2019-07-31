@@ -398,6 +398,8 @@ GEM
       tinymce-rails (~> 4.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    i18n-js (3.3.0)
+      i18n (>= 0.6.6)
     ice_nine (0.11.2)
     iiif-image-api (0.1.0)
       activesupport (<= 6)
@@ -876,6 +878,7 @@ DEPENDENCIES
   fcrepo_wrapper
   hydra-role-management
   hyrax (~> 2.5.0)
+  i18n-js
   iiif_manifest
   iso-639
   jasmine-jquery-rails

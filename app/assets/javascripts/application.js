@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= 
+//=
 //= require turbolinks
 //
 // Required by Blacklight
@@ -20,8 +20,10 @@
 //= require jquery-ui/widgets/sortable
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require blacklight/blacklight
+//= require i18n
+//= require i18n/translations
 
+//= require blacklight/blacklight
 //= require blacklight_gallery
 //= require cable
 //= require nestedSortable/jquery.mjs.nestedSortable
