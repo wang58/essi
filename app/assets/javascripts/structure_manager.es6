@@ -107,11 +107,11 @@ export default class StructureManager {
     let hide_html = "<span class='glyphicon glyphicon-eye-close'></span> Hide Thumbnails"
     $("*[data-action=toggle-thumbnails]").click(function(event) {
       event.preventDefault()
-      if($(".structue-thumbnail").is(':visible')){
-        $(".structue-thumbnail").hide()
+      if($(".structure-thumbnail").is(':visible')){
+        $(".structure-thumbnail").hide()
         $("#structure-thumbnail-button").html(show_html)
       }else{
-        $(".structue-thumbnail").show()
+        $(".structure-thumbnail").show()
         $("#structure-thumbnail-button").html(hide_html)
       }
     })
