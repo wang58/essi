@@ -6,6 +6,7 @@ export default class StructureManager {
     this.initialize_selectable()
     this.bind_persist()
     this.add_section_button()
+    this.toggle_thumbnails_button()
   }
 
   initialize_sortable() {
@@ -98,6 +99,21 @@ export default class StructureManager {
       let top_element = $(".sortable")
       let new_element = new_node()
       top_element.prepend(new_element)
+    })
+  }
+
+  toggle_thumbnails_button(){
+    let show_html = "<span class='glyphicon glyphicon-eye-open'></span> " + I18n.t('essi.structure.show_thumbnails')
+    let hide_html = "<span class='glyphicon glyphicon-eye-close'></span> " + I18n.t('essi.structure.hide_thumbnails')
+    $("*[data-action=toggle-thumbnails]").click(function(event) {
+      event.preventDefault()
+      if($(".structure-thumbnail").is(':visible')){
+        $(".structure-thumbnail").hide()
+        $("#structure-thumbnail-button").html(show_html)
+      }else{
+        $(".structure-thumbnail").show()
+        $("#structure-thumbnail-button").html(hide_html)
+      }
     })
   }
 

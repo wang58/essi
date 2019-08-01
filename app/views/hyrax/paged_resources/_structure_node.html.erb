@@ -20,7 +20,7 @@
         </div>
       </div>
       <% if node.proxy_for_id %>
-        <div class="panel-body">
+        <div class="panel-body structure-thumbnail">
           <%= osd_modal_for(node.proxy_for_object) do %>
             <%= render_thumbnail_tag(node.proxy_for_object, onerror: "this.src='#{image_path('default.png')}'".html_safe, class: 'structure-thumbnail')%>
           <% end %>
