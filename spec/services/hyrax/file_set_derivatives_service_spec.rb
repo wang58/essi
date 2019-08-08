@@ -30,9 +30,30 @@ RSpec.describe Hyrax::FileSetDerivativesService do
       before(:each) do
         allow(file_set).to receive(:mime_type).and_return('image/png')
       end
+      context 'with :skip_derivatives true' do
+        before(:each) do
+          ESSI.config[:essi][:skip_derivatives] = true
+          ESSI.config[:essi][:create_hocr_files] = true
+        end
+        it 'does not call OCRunner' do
+          expect(OCRRunner).not_to receive(:create)
+          fsd_service.create_derivatives(image_file)
+        end
+      end
+      context 'with :skip_derivatives not set' do
+        before(:each) do
+          ESSI.config[:essi][:skip_derivatives] = nil
+          ESSI.config[:essi][:create_hocr_files] = true
+        end
+        it 'does call OCRunner' do
+          expect(OCRRunner).to receive(:create)
+          fsd_service.create_derivatives(image_file)
+        end
+      end
       context 'with :create_hocr_files true' do
         before(:each) do
           ESSI.config[:essi][:create_hocr_files] = true
+          ESSI.config[:essi][:skip_derivatives] = false
         end
         it 'calls OCRRunner' do
           expect(OCRRunner).to receive(:create)
@@ -42,6 +63,7 @@ RSpec.describe Hyrax::FileSetDerivativesService do
       context 'with :create_hocr_file false' do
         before(:each) do
           ESSI.config[:essi][:create_hocr_files] = false
+          ESSI.config[:essi][:skip_derivatives] = false
         end
         it 'does not call OCRRunner' do
           expect(OCRRunner).not_to receive(:create)
