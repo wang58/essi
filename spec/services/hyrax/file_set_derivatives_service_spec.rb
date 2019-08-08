@@ -6,9 +6,11 @@ RSpec.describe Hyrax::FileSetDerivativesService do
   let(:fsd_service) { described_class.new(file_set) }
 
   around(:each) do |example|
-    original_value = ESSI.config[:essi][:create_hocr_files]
+    original_chf_value = ESSI.config[:essi][:create_hocr_files]
+    original_sd_value = ESSI.config[:essi][:skip_derivatives]
     example.call
-    ESSI.config[:essi][:create_hocr_files] = original_value
+    ESSI.config[:essi][:create_hocr_files] = original_chf_value
+    ESSI.config[:essi][:skip_derivatives] = original_sd_value
   end
 
   before(:each) do
@@ -20,6 +22,7 @@ RSpec.describe Hyrax::FileSetDerivativesService do
       before(:each) do
         allow(file_set).to receive(:mime_type).and_return('text/plain')
         ESSI.config[:essi][:create_hocr_files] = true
+        ESSI.config[:essi][:skip_derivatives] = false
       end
       it 'does not call OCRRunner' do
         expect(OCRRunner).not_to receive(:create)
@@ -29,26 +32,6 @@ RSpec.describe Hyrax::FileSetDerivativesService do
     context 'with an image' do
       before(:each) do
         allow(file_set).to receive(:mime_type).and_return('image/png')
-      end
-      context 'with :skip_derivatives true' do
-        before(:each) do
-          ESSI.config[:essi][:skip_derivatives] = true
-          ESSI.config[:essi][:create_hocr_files] = true
-        end
-        it 'does not call OCRunner' do
-          expect(OCRRunner).not_to receive(:create)
-          fsd_service.create_derivatives(image_file)
-        end
-      end
-      context 'with :skip_derivatives not set' do
-        before(:each) do
-          ESSI.config[:essi][:skip_derivatives] = nil
-          ESSI.config[:essi][:create_hocr_files] = true
-        end
-        it 'does call OCRunner' do
-          expect(OCRRunner).to receive(:create)
-          fsd_service.create_derivatives(image_file)
-        end
       end
       context 'with :create_hocr_files true' do
         before(:each) do
@@ -67,6 +50,26 @@ RSpec.describe Hyrax::FileSetDerivativesService do
         end
         it 'does not call OCRRunner' do
           expect(OCRRunner).not_to receive(:create)
+          fsd_service.create_derivatives(image_file)
+        end
+      end
+      context 'with :skip_derivatives true' do
+        before(:each) do
+          ESSI.config[:essi][:skip_derivatives] = true
+          ESSI.config[:essi][:create_hocr_files] = true
+        end
+        it 'does not call OCRunner' do
+          expect(OCRRunner).not_to receive(:create)
+          fsd_service.create_derivatives(image_file)
+        end
+      end
+      context 'with :skip_derivatives not set' do
+        before(:each) do
+          ESSI.config[:essi][:skip_derivatives] = nil
+          ESSI.config[:essi][:create_hocr_files] = true
+        end
+        it 'does call OCRunner' do
+          expect(OCRRunner).to receive(:create)
           fsd_service.create_derivatives(image_file)
         end
       end
