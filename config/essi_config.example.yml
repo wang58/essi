@@ -12,6 +12,11 @@ default: &default
   redis:
     host: 127.0.0.1
     port: 6379
+  sidekiq:
+    queue_names:
+      - default
+      - ingest
+    max_retries: 3
   rails:
     mailer:
       host: localhost:3000
