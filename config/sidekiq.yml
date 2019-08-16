@@ -1,4 +1,2 @@
 ---
-:queues:
-  - default
-  - ingest
+:queues: <%= ESSI.config.fetch(:sidekiq,{}).fetch(:queue_namess,nil) || "['default','ingest']" %>
