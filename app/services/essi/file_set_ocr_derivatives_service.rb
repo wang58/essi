@@ -1,17 +1,18 @@
 module ESSI
-  module FileSetDerivativesServiceExtensions
+  class FileSetOCRDerivativesService < Hyrax::FileSetDerivativesService
     def create_derivatives(filename)
       return if ESSI.config.dig(:essi, :skip_derivatives)
 
       super
-      case mime_type
-      when *file_set.class.image_mime_types
-        create_hocr_derivatives(filename)
-        create_word_boundaries
-      end
+      create_hocr_derivatives(filename)
+      create_word_boundaries
     end
 
     private
+
+    def supported_mime_types
+      file_set.class.image_mime_types
+    end
 
     def create_hocr_derivatives(filename)
       return unless ESSI.config.dig(:essi, :create_hocr_files)

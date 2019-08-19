@@ -1,3 +1,1 @@
-Hyrax::FileSetDerivativesService.class_eval do
-  prepend ESSI::FileSetDerivativesServiceExtensions
-end
+Hyrax::DerivativeService.services.unshift ESSI::FileSetOCRDerivativesService

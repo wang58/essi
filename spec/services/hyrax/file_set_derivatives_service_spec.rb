@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Hyrax::FileSetDerivativesService do
+RSpec.describe Hyrax::DerivativeService do
   let(:image_file) { File.join(fixture_path, 'world.png') }
   let(:file_set) { FactoryBot.create :file_set }
-  let(:fsd_service) { described_class.new(file_set) }
+  let(:fsd_service) { described_class.for(file_set) }
 
   around(:each) do |example|
     original_chf_value = ESSI.config[:essi][:create_hocr_files]
@@ -17,7 +17,13 @@ RSpec.describe Hyrax::FileSetDerivativesService do
     allow(OCRRunner).to receive(:create).and_return(nil)
   end
 
-  describe '.create_derivatives' do
+  describe 'services' do
+    it 'includes the OCR service' do
+      expect(described_class.services).to include ESSI::FileSetOCRDerivativesService
+    end
+  end
+
+  describe '.create_derivatives', :clean do
     context 'with a non-image' do
       before(:each) do
         allow(file_set).to receive(:mime_type).and_return('text/plain')
