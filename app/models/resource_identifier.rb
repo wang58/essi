@@ -9,9 +9,10 @@ class ResourceIdentifier
   end
 
   # Unique key of the object pointed to by ID's state.
-  def to_s
-    @digest ||= Digest::MD5.hexdigest(timestamp)
+  def digest
+    @digest ||= Digest::MD5.hexdigest(@id + timestamp)
   end
+  alias_method :to_s, :digest
 
   # Reload's this resource identifier so it's recalculated by #to_s.
   def reload
