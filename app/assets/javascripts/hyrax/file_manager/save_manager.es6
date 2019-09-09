@@ -24,7 +24,7 @@ export default class SaveManager {
   }
 
   check_button() {
-    if(this.is_changed && this.save_button.text() == "Save") {
+    if(this.is_changed && this.save_button.text() == I18n.t('hyrax.base.file_manager_actions.save')) {
       this.save_button.removeClass("disabled")
     } else {
       this.save_button.addClass("disabled")
@@ -41,13 +41,13 @@ export default class SaveManager {
         .fail((element) => { this.push_changed(element) })
       )
     })
-    this.save_button.text("Saving...")
+    this.save_button.text(I18n.t('hyrax.base.file_manager_actions.saving'))
     this.save_button.addClass("disabled")
     $.when.apply($, promises).always(() => { this.reset_save_button() })
   }
-  
+
   reset_save_button() {
-    this.save_button.text("Save")
+    this.save_button.text(I18n.t('hyrax.base.file_manager_actions.save'))
     this.check_button()
   }
 
