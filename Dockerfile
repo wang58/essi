@@ -1,9 +1,6 @@
 # system dependency image
 FROM ruby:2.5-stretch AS essi-sys-deps
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
-
 RUN apt-get update -qq && \
     apt-get install -y build-essential default-jre-headless libpq-dev nodejs \
       libreoffice-writer libreoffice-impress imagemagick unzip ghostscript \
@@ -35,6 +32,9 @@ FROM essi-sys-deps AS essi-deps
 
 RUN mkdir /app
 WORKDIR /app
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
 
 COPY Gemfile Gemfile.lock ./
 RUN gem update bundler
