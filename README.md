@@ -30,7 +30,8 @@ To set up a development environment via Docker:
 3. Run `docker-compose up web`. If there is a missing `.env.development` error, add an empty `.env.development` file and re-run `docker-compose up web`
 4. bundle exec rake db:migrate
 5. bundle exec rake db:seed
-6. Load the application at `localhost:3000` or `http://essi.docker` (if you are using Dory)
+6. Run `yarn install` to install the universal viewer.
+7. Load the application at `localhost:3000` or `http://essi.docker` (if you are using Dory)
 
 If using Dory: [Dory](https://github.com/FreedomBen/dory)
 
