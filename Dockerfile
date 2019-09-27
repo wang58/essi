@@ -65,6 +65,7 @@ CMD sidekiq
 # webserver image
 FROM essi-deps as essi-web
 RUN bundle exec rake assets:precompile
+RUN yarn install
 EXPOSE 3000
 ARG SOURCE_COMMIT
 ENV SOURCE_COMMIT $SOURCE_COMMIT
