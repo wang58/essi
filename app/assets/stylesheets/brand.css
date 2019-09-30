@@ -338,7 +338,10 @@
     position: relative;
   }
   #branding-bar:after {
-    height: 0;
+    /* essi tweaks hyrax header */
+    height: 15px;
+    bottom: -15px;
+    background-color: #3c3c3c;
   }
   #branding-bar img {
     position: absolute;
