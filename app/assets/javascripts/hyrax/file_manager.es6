@@ -5,6 +5,7 @@ export default class FileManager {
   constructor() {
     this.save_manager = this.initialize_save_manager()
     this.sorting()
+    this.save_affix()
     this.member_tracking()
     this.sortable_placeholder()
     this.resource_form()
