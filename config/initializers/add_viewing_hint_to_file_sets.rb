@@ -10,7 +10,7 @@ end
 
 module ImageBuilderAddViewingHints
   def apply(canvas)
-    canvas['viewingHint'] = canvas_viewing_hint(canvas)
+    canvas['viewingHint'] = canvas_viewing_hint(canvas) if canvas_viewing_hint(canvas).present?
     super
   end
 
