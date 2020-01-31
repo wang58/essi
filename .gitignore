@@ -38,3 +38,6 @@ fits.log
 # Ignore yarn generated files
 yarn.lock
 public/uv
+
+# Ignore public branding
+public/branding
