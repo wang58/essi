@@ -23,3 +23,6 @@ Hyrax::WorkShowPresenter.prepend Extensions::Hyrax::WorkShowPresenter::ManifestM
 Hyrax::CollectionPresenter.prepend Extensions::Hyrax::CollectionPresenter::CampusLogo
 Hyrax::WorkShowPresenter.prepend Extensions::Hyrax::WorkShowPresenter::CampusLogo
 Hyrax::FileSetPresenter.prepend Extensions::Hyrax::FileSetPresenter::CampusLogo
+
+# add collection banner to works and file sets.
+Hyrax::FileSetPresenter.include Extensions::Hyrax::FileSetPresenter::CollectionBanner
