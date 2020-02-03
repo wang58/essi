@@ -4,7 +4,13 @@ module Extensions
     module CollectionPresenter
       module CampusLogo
         def campus_logo
-          return collection_type.title if defined? collection_type
+          # Check if campus information is set for collection type
+          set = collection_type.title.parameterize(separator: '_')
+          return false unless ESSI.config[:essi][:campus_logos][set]
+
+          title = ESSI.config[:essi][:campus_logos][set][:title]
+          link = ESSI.config[:essi][:campus_logos][set][:url]
+          "<a href='#{link}'>#{title}</a>".html_safe
         end
       end
     end
