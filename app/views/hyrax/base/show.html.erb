@@ -2,6 +2,8 @@
 
 <%= render 'shared/citations' %>
 
+<%= render 'collection_banner' if @presenter.collection %>
+
 <div class="row work-type">
   <div class="col-sm-12">
     <%= render 'work_type', presenter: @presenter %>
