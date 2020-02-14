@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Hyrax::WorkShowPresenter do
+RSpec.describe Hyrax::FileSetPresenter do
   subject { described_class.new(double, double) }
 
   context 'When initialized' do
@@ -14,11 +14,12 @@ RSpec.describe Hyrax::WorkShowPresenter do
 
   context 'When admin_set matches configuration' do
     before do
-      name = ['The Collection', 'Another Collection']
+      sets = ['The Collection', 'Another Collection']
       @snake = 'the_collection'
       @title = 'The Title'
       @url = 'http://university.edu'
-      allow(subject).to receive(:admin_set).and_return(name)
+      work = double('WorkType', admin_set: sets)
+      allow(subject).to receive(:parent).and_return(work)
     end
 
     it '.campus_logo returns configured values' do
