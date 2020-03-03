@@ -27,6 +27,8 @@ default: &default
       options:
     active_job:
       queue_adapter: async
+  # cantaloupe:
+  #   iiif_server_url: http://localhost:8182/iiif/2/
   derivatives:
     path: <%= Rails.root.join("tmp/derivatives") %>
   iucat_libraries:
