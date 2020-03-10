@@ -2,13 +2,16 @@ default: &default
   fedora:
     user: fedoraAdmin
     password: fedoraAdmin
-    url: http://fcrepo:8080/fcrepo/rest
+    url: http://fcrepo:8080/rest
     base_path: /dev
   solr:
     url: http://solr:8983/solr/hydra-development
   db:
-    adapter: sqlite3
-    database: db/development.sqlite3
+    adapter: mysql2
+    host: db
+    database: essi_dev
+    user: essi
+    password: essi
   redis:
     host: redis
     port: 6379
@@ -46,6 +49,17 @@ default: &default
     default_email_domain: iu.edu
   authorized_ldap_groups:
     - ESSI-USERS
+  aws:
+    endpoint: http://minio:9000
+    bucket: essi-dropbox
+    access_key_id: essi-minio
+    secret_access_key: Essi12345
+    region: iu-local
+  browse_everything:
+    s3:
+      :bucket: essi-dropbox
+      :region: iu-local
+      :response_type: :signed_url
   essi:
     iiif_host: essi.docker
     notifier_email: example@test.test
@@ -152,7 +166,7 @@ test:
   fedora:
     user: fedoraAdmin
     password: fedoraAdmin
-    url: http://fcrepo:8080/fcrepo/rest
+    url: http://fcrepo:8080/rest
     base_path: /test
   solr:
     url: http://solr:8983/solr/hydra-test
