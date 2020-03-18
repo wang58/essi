@@ -74,6 +74,9 @@ default: &default
     index_hocr_files: true
     create_word_boundaries: true
     allow_pdf_download: false
+    bagit:
+      default_upload_dropbox: <%= Rails.root.join("staged_files/uploaded") %>
+      default_bagit_dir: <%= Rails.root.join("staged_files/work_bags") %>
     manifest_builder:
       see_also_hash:
         id: http://dlib.indiana.edu:9000/iucatextract?maximumRecords=1&operation=searchRetrieve&query=cql.serverChoice=%s&recordSchema=marcxml&version=1.1
