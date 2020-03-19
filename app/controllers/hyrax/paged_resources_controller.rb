@@ -31,12 +31,5 @@ module Hyrax
       end
       params[:highlight] = search_term&.flatten&.first
     end
-
-    def additional_response_formats(wants)
-      wants.uv do
-        presenter && parent_presenter
-        render 'viewer_only.html.erb', layout: 'boilerplate', content_type: 'text/html'
-      end
-    end
   end
 end
