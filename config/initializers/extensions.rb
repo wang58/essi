@@ -11,9 +11,6 @@ Rails.application.config.after_initialize do
   Hyrax::Forms::FileManagerForm.include Extensions::Hyrax::Forms::FileManagerForm::ViewingMetadata
   Hyrax::FileSetPresenter.include Extensions::Hyrax::FileSetPresenter::ViewingHint
 
-  # primary fields support
-  Hyrax::Forms::WorkForm.class_eval { include Extensions::Hyrax::Forms::WorkForm::PrimaryFields }
-
   # TODO: determine if needed?
   # iiif manifest support
   Hyrax::WorkShowPresenter.prepend Extensions::Hyrax::WorkShowPresenter::ManifestMetadata
@@ -27,3 +24,6 @@ Rails.application.config.after_initialize do
   Hyrax::FileSetPresenter.include Extensions::Hyrax::FileSetPresenter::CollectionBanner
   Hyrax::WorkShowPresenter.include Extensions::Hyrax::WorkShowPresenter::CollectionBanner
 end
+
+# primary fields support
+Hyrax::Forms::WorkForm.class_eval { include Extensions::Hyrax::Forms::WorkForm::PrimaryFields }
