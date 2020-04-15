@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "hyrax/paged_resources/structure.html.erb", type: :view do
+RSpec.describe "hyrax/base/structure.html.erb", type: :view do
   let(:logical_order) do
     WithProxyForObject::Factory.new(members).new(params)
   end
@@ -40,7 +40,7 @@ RSpec.describe "hyrax/paged_resources/structure.html.erb", type: :view do
   before do
     assign(:logical_order, logical_order)
     assign(:presenter, paged_resource)
-    render template: "hyrax/paged_resources/structure.html.erb", locals: { curation_concern: curation_concern }
+    render template: "hyrax/base/structure.html.erb", locals: { curation_concern: curation_concern }
   end
   it "renders a li per node" do
     expect(rendered).to have_selector("li", count: 3)
