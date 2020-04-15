@@ -5,6 +5,7 @@ class BibRecordIndexer < Hyrax::WorkIndexer
   # provide your own metadata and indexing.
   include Hyrax::IndexesBasicMetadata
   include ESSI::BibRecordIndexerBehavior
+  include ESSI::IIIFThumbnailBehavior
 
   # Fetch remote labels for based_near. You can remove this if you don't want
   # this behavior
