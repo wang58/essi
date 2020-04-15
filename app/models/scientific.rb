@@ -3,6 +3,7 @@
 class Scientific < ActiveFedora::Base
   include ESSI::ScientificBehavior
   include ::Hyrax::WorkBehavior
+  include ::StructureModules
 
   self.indexer = ScientificIndexer
   # Change this to restrict which works can be added as a child.

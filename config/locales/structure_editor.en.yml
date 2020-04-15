@@ -1,8 +1,13 @@
 en:
   essi:
     structure:
+      label: Structure Label
       viewing_options: Viewing Options
       hide_thumbnails: Hide Thumbnails
       show_thumbnails: Show Thumbnails
+      save_structure: Save Structure
+      sections: Sections
+      add_a_section: Add a Section
       save: Save Changes
       saving: Saving...
+      unsaved_nodes: Files below this line are associated to the work, but have not yet been saved to the structure

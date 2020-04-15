@@ -3,6 +3,7 @@
 class Image < ActiveFedora::Base
   include ESSI::ImageBehavior
   include ::Hyrax::WorkBehavior
+  include ::StructureModules
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.

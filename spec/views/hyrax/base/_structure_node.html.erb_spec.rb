@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "hyrax/paged_resources/_structure_node.html.erb", :clean do
+RSpec.describe "hyrax/base/_structure_node.html.erb", :clean do
   let(:node) do
     WithProxyForObject::Factory.new([member]).new(params)
   end
@@ -16,7 +16,7 @@ RSpec.describe "hyrax/paged_resources/_structure_node.html.erb", :clean do
   end
 
   before do
-    render partial: 'hyrax/paged_resources/structure_node',
+    render partial: 'hyrax/base/structure_node',
            locals: { node: node }
   end
   it "displays an openseadragon tag for proxies" do
