@@ -8,7 +8,6 @@ module Hyrax
     include ESSI::WorksControllerBehavior
     include ESSI::PagedResourcesControllerBehavior
     include ESSI::RemoteMetadataLookupBehavior
-    include ESSI::StructureBehavior
     include Hyrax::BreadcrumbsForWorks
     include ESSI::BreadcrumbsForWorks
     self.curation_concern_type = ::PagedResource
