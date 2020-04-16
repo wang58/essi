@@ -20,8 +20,11 @@
     <div class="col-sm-8 text-right">
     <% if presenter.editor? %>
         <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
-        <% if presenter.member_presenters.size > 1 %>
+        <% if presenter.member_presenters.any? %>
+            <% begin %>
             <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, presenter]), class: 'btn btn-default' %>
+            <% rescue NoMethodError %>
+            <% end %>
             <% begin %>
               <%= link_to t("hyrax.structure_manager.link_text"), polymorphic_path([main_app, :structure, presenter]), class: 'btn btn-default' %>
             <% rescue NoMethodError %>

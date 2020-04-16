@@ -1,7 +1,7 @@
 <% provide :page_title, curation_concern_page_title(curation_concern) %>
 <% provide :page_header do %>
   <%= lock_warning(curation_concern) %>
-  <h1><span class="fa fa-sitemap" aria-hidden="true"></span>Edit Structure</h1>
+  <h1><span class="fa fa-sitemap" aria-hidden="true"></span><%= t('hyrax.structure_manager.link_text') %></h1>
 <% end %>
 
 <div class="row">
@@ -10,15 +10,18 @@
       <ul class="sortable" data-id="<%= @presenter.id %>" data-class-name="<%= @presenter.model_name.plural %>">
         <form class="form-inline">
           <div class="form-group">
-            <label for="structure_label">Structure Label</label>
+            <label for="structure_label"><%= t('essi.structure.label') %></label>
             <%= text_field_tag "label", @logical_order.form_label, id: "structure_label", class: "form-control" %>
           </div>
         </form>
         <% @logical_order.nodes.each do |node| %>
           <%= render "structure_node", node: node %>
         <% end %>
-        <% @logical_order.unstructured_objects.nodes.each do |node| %>
-          <%= render "structure_node", node: node %>
+        <% if @logical_order.unstructured_objects.nodes.any? %>
+          <h3><%= t('essi.structure.unsaved_nodes') %></h3>
+          <% @logical_order.unstructured_objects.nodes.each do |node| %>
+            <%= render "structure_node", node: node %>
+          <% end %>
         <% end %>
       </ul>
     </div>
@@ -27,7 +30,7 @@
   <div id="list-toolbar" class="col-xs-12 col-sm-4 fixedsticky" role="complementary">
     <aside class="form-progress panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= I18n.t('essi.structure.viewing_options') %></h3>
+        <h3 class="panel-title"><%= t('essi.structure.viewing_options') %></h3>
       </div>
       <div class="list-group">
         <div class="list-group-item">
@@ -35,7 +38,7 @@
             <div class="text-center">
               <a href="" data-action="toggle-thumbnails">
                 <button class="btn btn-success" id="structure-thumbnail-button">
-                  <span class='glyphicon glyphicon-eye-close'></span> <%= I18n.t('essi.structure.hide_thumbnails') %>
+                  <span class='glyphicon glyphicon-eye-close'></span> <%= t('essi.structure.hide_thumbnails') %>
                 </button>
               </a>
             </div>
@@ -43,17 +46,17 @@
         </div>
       </div>
       <div class="panel-heading">
-        <h3 class="panel-title">Save Structure</h3>
+        <h3 class="panel-title"><%= t('essi.structure.save_structure') %></h3>
       </div>
       <div class="list-group">
         <div class="list-group-item">
           <fieldset>
-            <legend class="legend-save-work">Sections</legend>
+            <legend class="legend-save-work"><%= t('essi.structure.sections') %></legend>
             <div class="text-center">
               <a href="" data-action="add-to-list">
                 <button class="btn btn-success">
                   <span class="glyphicon glyphicon-plus"></span>
-                  Add a Section
+                  <%= t('essi.structure.add_a_section') %>
                 </button>
               </a>
             </div>
@@ -64,7 +67,7 @@
         <%= button_tag type: 'button', class: 'btn btn-primary',
                        data: { action: 'submit-list',
                                prefix: Rails.application.config.relative_url_root || '' } do %>
-          <%= I18n.t('essi.structure.save') %>
+          <%= t('essi.structure.save') %>
         <% end %>
       </div>
     </aside>
