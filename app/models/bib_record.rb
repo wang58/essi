@@ -5,6 +5,8 @@ class BibRecord < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include StructuralMetadata
   include ExtraLockable
+  include ESSI::NumPagesMetadata
+  include ESSI::NumPagesBehavior
 
   self.indexer = BibRecordIndexer
   # Change this to restrict which works can be added as a child.
