@@ -9,6 +9,7 @@ module Hyrax
     include ESSI::ScientificsControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     include ESSI::BreadcrumbsForWorks
+    include ESSI::StructureBehavior
     self.curation_concern_type = ::Scientific
 
     # Use this line if you want to use a custom presenter

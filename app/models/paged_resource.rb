@@ -3,7 +3,7 @@
 class PagedResource < ActiveFedora::Base
   include ESSI::PagedResourceBehavior
   include ::Hyrax::WorkBehavior
-  include ::StructureModules
+  include StructuralMetadata
   include ExtraLockable
 
   self.indexer = PagedResourceIndexer
