@@ -5,6 +5,8 @@ class Scientific < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include StructuralMetadata
   include ExtraLockable
+  include ESSI::NumPagesMetadata
+  include ESSI::NumPagesBehavior
 
   self.indexer = ScientificIndexer
   # Change this to restrict which works can be added as a child.

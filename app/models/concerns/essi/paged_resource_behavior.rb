@@ -3,8 +3,6 @@ module ESSI
     extend ActiveSupport::Concern
     # Add behaviors that make this work type unique
     included do
-      before_save :set_num_pages
-
       def ocr_searchable?
         return true if self.ocr_state == 'searchable'
         return false
@@ -17,12 +15,5 @@ module ESSI
                                Solrizer::Descriptor.new(:boolean, :stored, :indexed))] = self.ocr_searchable?
       end
     end
-
-  private
-
-    def set_num_pages
-      self.num_pages = self.member_ids.size
-    end
-
   end
 end
