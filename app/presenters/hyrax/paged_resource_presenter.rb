@@ -2,6 +2,8 @@
 #  `rails generate hyrax:work PagedResource`
 module Hyrax
   class PagedResourcePresenter < Hyrax::WorkShowPresenter
+    include ESSI::PresentsStructure
+
     delegate :num_pages, :series, :viewing_direction, :viewing_hint,
              to: :solr_document
 

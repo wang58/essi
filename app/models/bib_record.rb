@@ -3,7 +3,7 @@
 class BibRecord < ActiveFedora::Base
   include ESSI::BibRecordBehavior
   include ::Hyrax::WorkBehavior
-  include ::StructureModules
+  include StructuralMetadata
 
   self.indexer = BibRecordIndexer
   # Change this to restrict which works can be added as a child.
