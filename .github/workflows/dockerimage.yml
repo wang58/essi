@@ -12,5 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build and push to Docker Hub
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: iublibtech/essi
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_AUTH_TOKEN }}
+        tags: "latest,master"
