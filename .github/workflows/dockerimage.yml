@@ -19,3 +19,5 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_AUTH_TOKEN }}
         tags: "latest,master"
+      env: 
+        SOURCE_COMMIT: ${{ github.sha }}
