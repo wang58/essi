@@ -18,6 +18,7 @@ jobs:
         name: iublibtech/essi
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_AUTH_TOKEN }}
+        buildargs: SOURCE_COMMIT
         tags: "latest,master"
       env: 
         SOURCE_COMMIT: ${{ github.sha }}
