@@ -120,7 +120,7 @@ services:
       HEAPCACHE_TARGET_SIZE: 256M
       CACHE_SERVIER_DERIVATIVE_TTL_SECONDS: 0
       CACHE_SERVER_PURGE_MISSING: "true"
-      LOG_APPLICATION_LEVEL: info
+      LOG_APPLICATION_LEVEL: debug
       LOG_ACCESS_CONSOLEAPPENDER_ENABLED: "true"
     volumes:
       - './cantaloupe:/cantaloupe/delegate'
