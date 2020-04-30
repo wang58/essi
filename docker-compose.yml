@@ -1,6 +1,14 @@
 version: '3.7'
 services:
   web:
+    image: nginxinc/nginx-unprivileged:stable-alpine
+    volumes:
+      - ./essi-nginx.nginx:/etc/nginx/conf.d/essi-nginx.conf
+    ports:
+      - "80:8980"
+    depends_on:
+      - app
+  app:
     image: "${REGISTRY_HOST}${REGISTRY_URI}:${TAG}"
     command: bash -l -c "rake db:migrate && yarn install && bundle exec puma -b tcp://0.0.0.0:3000"
     build:
