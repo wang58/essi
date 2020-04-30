@@ -176,7 +176,7 @@ services:
   fcrepo:
     image: samvera/fcrepo4:4.7.5
     volumes:
-      - 'fcrepo:/opt/data'
+      - 'fcrepo:/data'
     ports:
       - "8080"
 
