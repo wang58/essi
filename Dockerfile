@@ -17,8 +17,8 @@ RUN yarn && \
     yarn config set no-progress && \
     yarn config set silent
 RUN mkdir -p /opt/fits && \
-    curl -fSL -o /opt/fits/fits-1.3.0.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.3.0.zip && \
-    cd /opt/fits && unzip fits-1.3.0.zip && chmod +X fits.sh
+    curl -fSL -o /opt/fits/fits-1.5.0.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
+    cd /opt/fits && unzip fits-1.5.0.zip && chmod +X fits.sh
 ENV PATH /opt/fits:$PATH
 
 # ruby dev image
