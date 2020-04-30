@@ -36,7 +36,6 @@ fits.log
 .env.*
 
 # Ignore yarn generated files
-yarn.lock
 public/uv
 
 # Ignore public branding
