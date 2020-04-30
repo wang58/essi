@@ -65,6 +65,7 @@ default: &default
   essi:
     iiif_host: localhost:3000  # riiif only
     notifier_email: example@test.test
+    store_jpeg2_files: true
     store_original_files: true
     master_file_service_url: http://purl.dlib.indiana.edu/iudl/variations/master
     access_file_service_url: http://purl.dlib.indiana.edu/iudl/variations/access

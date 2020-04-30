@@ -23,7 +23,23 @@ module Hyrax
       # @todo create a job to monitor the temp directory (or in a multi-worker system, directories!) to prune old files that have made it into the repo
       def ingest_file(io)
         # FIXME: pass along mimetype, filename options?
-        if store_files?
+        if store_jp2?
+          unless io.mime_type == 'image/jp2'
+            image = MiniMagick::Image.open(io.path)
+            image.format 'jp2'
+            new_name = "#{File.basename(io.path, '.*')}.jp2"
+            new_path = "#{File.dirname(image.path)}/#{new_name}"
+            File.rename(image.path, new_path)
+            io.path = new_path
+            io.mime_type = 'image/jp2'
+            file_set.title = [new_name]
+            file_set.label = new_name
+          end
+          Hydra::Works::AddFileToFileSet.call(file_set,
+                                              io,
+                                              relation,
+                                              versioning: false)
+        elsif store_files?
           Hydra::Works::AddFileToFileSet.call(file_set,
                                               io,
                                               relation,
@@ -39,6 +55,7 @@ module Hyrax
         Hyrax::VersioningService.create(repository_file, user)
         pathhint = io.uploaded_file.uploader.path if io.uploaded_file # in case next worker is on same filesystem
         CharacterizeJob.perform_later(file_set, repository_file.id, pathhint || io.path) if store_files?
+        CharacterizeJob.perform_later(file_set, related_file.id, io.path) if store_jp2?
       end
 
       # Reverts file and spawns async job to characterize and create derivatives.
@@ -66,10 +83,14 @@ module Hyrax
           file_set.public_send(relation) || raise("No #{relation} returned for FileSet #{file_set.id}")
         end
 
+        def store_jp2?
+          ESSI.config.dig :essi, :store_jpeg2_files
+        end
+
         def store_files?
           ESSI.config.dig :essi, :store_original_files
         end
-    
+
         def master_file_service_url
           ESSI.config.dig :essi, :master_file_service_url
         end
