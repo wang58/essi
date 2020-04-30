@@ -33,7 +33,7 @@ RUN bundle install -j 2 --retry=3
 
 COPY . .
 RUN mkdir -p /run/secrets
-COPY config/essi_config.docker.yml /run/secrets/essi_config.yml
+#COPY config/essi_config.docker.yml /run/secrets/essi_config.yml
 
 ENV RAILS_LOG_TO_STDOUT true
 

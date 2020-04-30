@@ -58,6 +58,7 @@ services:
       - .env
     volumes:
       - .:/app
+      - ./config/essi_config.docker.yml:/run/secrets/essi_config.yml
     depends_on:
       - redis
       - solr
