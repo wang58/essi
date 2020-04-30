@@ -23,6 +23,7 @@ services:
       - "3000:3000"
     stdin_open: true
     tty: true
+    user: "1000:1000"
     env_file:
       - .env.development
       - .env
@@ -50,6 +51,7 @@ services:
       IN_DOCKER: 'true'
     stdin_open: true
     tty: true
+    user: "1000:1000"
     env_file:
       - .env.development
       - .env

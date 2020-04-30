@@ -1,7 +1,9 @@
 # system dependency image
 FROM ruby:2.5-stretch AS essi-sys-deps
 
-RUN apt-get update -qq && \
+RUN addgroup --gid 1000 essi && \
+    adduser --disabled-login --ingroup essi --gecos "essi user" --uid 1000 essi && \
+    apt-get update -qq && \
     apt-get -y install apt-transport-https && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -36,6 +38,8 @@ RUN mkdir -p /run/secrets
 #COPY config/essi_config.docker.yml /run/secrets/essi_config.yml
 
 ENV RAILS_LOG_TO_STDOUT true
+
+USER 1000:1000
 
 # ruby dependencies image
 FROM essi-sys-deps AS essi-deps
