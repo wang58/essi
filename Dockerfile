@@ -6,7 +6,7 @@ RUN apt-get update -qq && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     echo "deb http://http.us.debian.org/debian/ testing non-free contrib main" | tee -a /etc/apt/sources.list && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get update -qq && \
     apt-get install -y build-essential default-jre-headless libpq-dev nodejs \
       libreoffice-writer libreoffice-impress imagemagick unzip ghostscript && \
