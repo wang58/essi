@@ -43,3 +43,5 @@ public/branding
 
 # Ignore Browse Everything dropbox directory
 staged_files
+
+public/assets
